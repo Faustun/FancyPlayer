@@ -1,4 +1,4 @@
-import { PlayerInterfaceConfig } from '../type'
+import { PlayerInterfaceConfig } from '../type/options'
 
 export default (options: PlayerInterfaceConfig): PlayerInterfaceConfig => {
   // default options
