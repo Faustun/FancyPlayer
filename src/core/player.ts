@@ -1,7 +1,7 @@
 import { PlayerInterfaceConfig, interfaceQuality } from '../type/options'
 import { PlayerInterface } from '../type/player'
 import { TranInterface } from '../type/i18n'
-import { EventsInterface } from '../type/events'
+import { EventsInterface, PlayerOnCallBack } from '../type/events'
 import { UserInterface } from '../type/user'
 import handleOption from './options'
 import I18n from './i18n'
@@ -9,6 +9,8 @@ import Events from './events'
 import User from './user'
 import Utils from '../helpers/utils'
 import Dom from './dom'
+import Bar from './bar'
+import FullScreen from './fullscreen'
 
 export default class TPlayer implements PlayerInterface {
   options: PlayerInterfaceConfig
@@ -20,6 +22,10 @@ export default class TPlayer implements PlayerInterface {
   container: any
   arrow: boolean
   dom: any
+  video: any
+  bar: any
+  fullScreen: any
+  controller: any
 
   constructor(options: PlayerInterfaceConfig) {
     this.options = handleOption(options)
@@ -49,5 +55,25 @@ export default class TPlayer implements PlayerInterface {
     }
 
     this.dom = new Dom(this.container, options, this.tran)
+
+    this.video = this.dom.video
+
+    this.bar = new Bar(this.dom)
+
+    this.fullScreen = new FullScreen(this)
+  }
+
+  on(name: string, callback: PlayerOnCallBack) {
+    this.events.on(name, callback)
+  }
+  resize() {
+    if (this.controller.thumbnails) {
+      this.controller.thumbnails.resize(
+        160,
+        (this.video.videoHeight / this.video.videoWidth) * 160,
+        this.dom.playedBarWrap.offsetWidth
+      )
+    }
+    this.events.trigger('resize')
   }
 }

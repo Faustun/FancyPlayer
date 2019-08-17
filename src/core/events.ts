@@ -1,5 +1,4 @@
-import { EventsInterface } from '../type/events'
-import { PlayerOnCallBack } from '../type/player'
+import { EventsInterface, PlayerOnCallBack } from '../type/events'
 
 class Events implements EventsInterface {
   events: any
@@ -70,7 +69,7 @@ class Events implements EventsInterface {
     }
   }
 
-  trigger(name: string, info: any) {
+  trigger(name: string, info?: any) {
     if (this.events[name] && this.events[name].length) {
       for (let i = 0; i < this.events[name].length; i++) {
         this.events[name][i](info)
