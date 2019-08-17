@@ -1,4 +1,4 @@
-import { PlayerOnCallBack } from './index'
+import { PlayerOnCallBack } from './player'
 
 export interface EventsInterface {
   events: any

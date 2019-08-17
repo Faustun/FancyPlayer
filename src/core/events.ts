@@ -1,5 +1,5 @@
 import { EventsInterface } from '../type/events'
-import { PlayerOnCallBack } from '../type/index'
+import { PlayerOnCallBack } from '../type/player'
 
 class Events implements EventsInterface {
   events: any
