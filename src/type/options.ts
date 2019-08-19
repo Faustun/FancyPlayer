@@ -3,7 +3,7 @@ export type Type = 'auto' | 'hls' | 'flv' | 'dash' | 'webtorrent' | 'normal'
 export type Preload = 'none' | 'metadata' | 'auto'
 
 export interface PlayerInterfaceConfig {
-  container: object
+  container: HTMLElement
   video: PlayerConfigVideo
   live?: boolean
   autoplay?: boolean
@@ -23,15 +23,15 @@ export interface PlayerInterfaceConfig {
 
 export interface PlayerConfigVideo {
   url: string
-  quality?: interfaceQuality[]
+  quality?: InterfaceQuality[]
   defaultQuality?: number
   pic?: string
   thumbnails?: string
   type?: Type
-  customType?: string
+  customType?: any
 }
 
-export interface interfaceQuality {
+export interface InterfaceQuality {
   name: string
   url: string
   type: string

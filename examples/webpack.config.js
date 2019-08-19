@@ -51,6 +51,7 @@ module.exports = {
         compress: true,
         contentBase: path.resolve(__dirname, '..', 'examples'),
         clientLogLevel: 'none',
+        port: 9000,
         quiet: false,
         open: true,
         historyApiFallback: {

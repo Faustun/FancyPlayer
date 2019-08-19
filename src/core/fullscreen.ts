@@ -1,7 +1,10 @@
 import { PlayerInterface } from '../type/player'
+import { ScrollPosition } from '../type/utils'
+import Utils from '../helpers/Utils'
 
 export default class FullScreen {
   player: PlayerInterface
+  lastScrollPosition?: ScrollPosition
 
   constructor(player: PlayerInterface) {
     this.player = player
@@ -11,7 +14,7 @@ export default class FullScreen {
     })
     this.player.events.on('webfullscreen_cancel', () => {
       this.player.resize()
-      utils.setScrollPosition(this.lastScrollPosition)
+      Utils.setScrollPosition(this.lastScrollPosition!)
     })
 
     const fullscreenchange = () => {
@@ -19,7 +22,7 @@ export default class FullScreen {
       if (this.isFullScreen('browser')) {
         this.player.events.trigger('fullscreen')
       } else {
-        utils.setScrollPosition(this.lastScrollPosition)
+        Utils.setScrollPosition(this.lastScrollPosition!)
         this.player.events.trigger('fullscreen_cancel')
       }
     }
@@ -33,7 +36,7 @@ export default class FullScreen {
       if (fullEle) {
         this.player.events.trigger('fullscreen')
       } else {
-        utils.setScrollPosition(this.lastScrollPosition)
+        Utils.setScrollPosition(this.lastScrollPosition!)
         this.player.events.trigger('fullscreen_cancel')
       }
     }
@@ -59,6 +62,75 @@ export default class FullScreen {
         )
       case 'web':
         return this.player.container.classList.contains('dplayer-fulled')
+    }
+  }
+
+  request(type = 'browser') {
+    const anotherType = type === 'browser' ? 'web' : 'browser'
+    const anotherTypeOn = this.isFullScreen(anotherType)
+    if (!anotherTypeOn) {
+      this.lastScrollPosition = Utils.getScrollPosition()
+    }
+
+    switch (type) {
+      case 'browser':
+        if (this.player.container.requestFullscreen) {
+          this.player.container.requestFullscreen()
+        } else if (this.player.container.mozRequestFullScreen) {
+          this.player.container.mozRequestFullScreen()
+        } else if (this.player.container.webkitRequestFullscreen) {
+          this.player.container.webkitRequestFullscreen()
+        } else if (this.player.video.webkitEnterFullscreen) {
+          // Safari for iOS
+          this.player.video.webkitEnterFullscreen()
+        } else if (this.player.video.webkitEnterFullScreen) {
+          this.player.video.webkitEnterFullScreen()
+        } else if (this.player.container.msRequestFullscreen) {
+          this.player.container.msRequestFullscreen()
+        }
+        break
+      case 'web':
+        this.player.container.classList.add('dplayer-fulled')
+        document.body.classList.add('dplayer-web-fullscreen-fix')
+        this.player.events.trigger('webfullscreen')
+        break
+    }
+
+    if (anotherTypeOn) {
+      this.cancel(anotherType)
+    }
+  }
+
+  cancel(type = 'browser') {
+    switch (type) {
+      case 'browser':
+        if (document.cancelFullScreen) {
+          document.cancelFullScreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen()
+        } else if (document.webkitCancelFullscreen) {
+          document.webkitCancelFullscreen()
+        } else if (document.msCancelFullScreen) {
+          document.msCancelFullScreen()
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen()
+        }
+        break
+      case 'web':
+        this.player.container.classList.remove('dplayer-fulled')
+        document.body.classList.remove('dplayer-web-fullscreen-fix')
+        this.player.events.trigger('webfullscreen_cancel')
+        break
+    }
+  }
+
+  toggle(type = 'browser') {
+    if (this.isFullScreen(type)) {
+      this.cancel(type)
+    } else {
+      this.request(type)
     }
   }
 }
