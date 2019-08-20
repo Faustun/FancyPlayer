@@ -14,7 +14,7 @@ export default class Dom {
   playedBar?: HTMLElement
   playedBarWrap?: HTMLElement
   playedBarTime?: HTMLElement
-  video?: HTMLElement
+  video?: HTMLMediaElement
   playButton?: HTMLElement
   playButtonIco?: HTMLElement
   videoWrap?: HTMLElement

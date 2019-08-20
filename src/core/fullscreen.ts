@@ -1,6 +1,6 @@
 import { PlayerInterface } from '../type/player'
 import { ScrollPosition } from '../type/utils'
-import Utils from '../helpers/Utils'
+import Utils from '../helpers/utils'
 
 export default class FullScreen {
   player: PlayerInterface

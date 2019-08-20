@@ -332,11 +332,9 @@ export default class TPlayer implements PlayerInterface {
     this.dom.playButtonIco.className = 'iconfont iconpause'
 
     const playedPromise = Promise.resolve(this.video.play())
-    playedPromise
-      .catch(() => {
-        this.pause()
-      })
-      .then(() => {})
+    playedPromise.catch(() => {
+      this.pause()
+    })
     this.timer.enable('loading')
     this.container.classList.remove('dplayer-paused')
     this.container.classList.add('dplayer-playing')

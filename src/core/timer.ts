@@ -14,9 +14,9 @@ class Timer implements TimerInterface {
     window.requestAnimationFrame = (() =>
       window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
-      (<any>window).mozRequestAnimationFrame ||
-      (<any>window).oRequestAnimationFrame ||
-      (<any>window).msRequestAnimationFrame ||
+      (window as any).mozRequestAnimationFrame ||
+      (window as any).oRequestAnimationFrame ||
+      (window as any).msRequestAnimationFrame ||
       function(callback) {
         window.setTimeout(callback, 1000 / 60)
       })()
@@ -30,6 +30,8 @@ class Timer implements TimerInterface {
     this.types.map((item: string) => {
       if (item !== 'fps') {
         // this[`init${item}Checker`]();
+        console.log(item)
+        console.log((this as any)[`init${item}Checker`])
         ;(this as any)[`init${item}Checker`]()
       }
       return item
@@ -82,13 +84,13 @@ class Timer implements TimerInterface {
   //     });
   // }
 
-  // initinfoChecker() {
-  //     this.infoChecker = window.setInterval(() => {
-  //         if (this.enableinfoChecker) {
-  //             this.player.infoPanel.update();
-  //         }
-  //     }, 1000);
-  // }
+  initinfoChecker() {
+    // this.infoChecker = window.setInterval(() => {
+    //     if (this.enableinfoChecker) {
+    //         this.player.infoPanel.update();
+    //     }
+    // }, 1000);
+  }
 
   enable(type: string) {
     ;(this as any)[`enable${type}Checker`] = true

@@ -1,4 +1,4 @@
-import Utils from '../helpers/Utils'
+import Utils from '../helpers/utils'
 import Thumbnails from './thumbnails'
 
 import { PlayerInterface } from '../type/player'

@@ -10,7 +10,7 @@ export interface TimerInterface {
   init(): void
   initloadingChecker(): void
   // initfpsChecker(): void
-  // initinfoChecker(): void
+  initinfoChecker(): void
   enable(type: string): void
   disable(type: string): void
   destroy(): void

@@ -98,8 +98,8 @@ export default class Utils {
     return actualLeft - elementScrollLeft
   }
   static cumulativeOffset(element: HTMLElement) {
-    let top = 0,
-      left = 0
+    let top: number = 0
+    let left: number = 0
     do {
       top += element.offsetTop || 0
       left += element.offsetLeft || 0
