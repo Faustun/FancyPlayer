@@ -48,6 +48,7 @@ export default class TPlayer implements PlayerInterface {
       this.qualityIndex = this.options.video.defaultQuality!
       this.qualityVideo = this.options.video.quality[this.qualityIndex]
     }
+    console.log(this.options.lang!)
     this.tran = new I18n(this.options.lang!).tran
     this.events = new Events()
     this.user = new User(this)

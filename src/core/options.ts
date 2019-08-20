@@ -39,6 +39,5 @@ export default (options: PlayerInterfaceConfig): PlayerInterfaceConfig => {
   if (options.video.quality) {
     options.video.url = options.video.quality[options.video.defaultQuality!].url
   }
-
   return options
 }

@@ -86,6 +86,7 @@ export default class I18n implements I18nInterface {
 
   constructor(lang: Lang) {
     this.lang = lang
+    this.tran = this.tran.bind(this)
   }
   tran(text: string) {
     if (tranTxt[this.lang] && tranTxt[this.lang][text]) {
