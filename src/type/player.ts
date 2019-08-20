@@ -7,6 +7,7 @@ import { DomInterface } from './dom'
 export interface PlayerInterface {
   bar: any
   timer: any
+  controller: any
   paused?: boolean
   fullScreen: any
   // subtitle: any;

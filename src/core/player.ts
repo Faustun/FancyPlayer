@@ -14,6 +14,7 @@ import FullScreen from './fullscreen'
 import Controller from './controller'
 import Timer from './timer'
 import Bezel from './bezel'
+import Hotkey from './hotkey'
 
 let index = 0
 const instances: PlayerInterface[] = []
@@ -39,6 +40,7 @@ export default class TPlayer implements PlayerInterface {
   noticeTime: any
   focus?: boolean
   type?: string
+  hotkey: any
 
   constructor(options: PlayerInterfaceConfig) {
     this.options = handleOption(options)
@@ -73,6 +75,7 @@ export default class TPlayer implements PlayerInterface {
 
     this.bar = new Bar(this.dom)
     this.bezel = new Bezel(this.dom)
+    this.hotkey = new Hotkey(this)
 
     this.fullScreen = new FullScreen(this)
     this.controller = new Controller(this)
