@@ -26,6 +26,10 @@ export default class Dom {
   webFullButton?: HTMLElement
   notice?: HTMLElement
   volumeIconFont?: HTMLElement
+  playedBarPreview?: HTMLElement
+  bezelIconBox?: HTMLElement
+  bezelIcon?: HTMLElement
+  loadingIcon?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -36,6 +40,7 @@ export default class Dom {
     const { video, preload, screenshot, logo, theme } = options
     this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
     this.videoWrap = this.createDom({ ele: element, label: 'div', className: 'dplayer-video-wrap' })
+    // 视频
     if (video) {
       const { url = '', pic = '' } = video
       this.video = this.createDom({
@@ -58,6 +63,29 @@ export default class Dom {
       })
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
     }
+    const bezelWrap = this.createDom({
+      ele: this.videoWrap,
+      label: 'div',
+      className: 'dplayer-bezel'
+    })
+    this.bezelIconBox = this.createDom({
+      ele: bezelWrap,
+      label: 'span',
+      className: 'dplayer-bezel-icon'
+    })
+    const LoadHtmlStr = `<div class="spinner1"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>`
+    this.loadingIcon = this.createDom({
+      ele: bezelWrap,
+      label: 'span',
+      className: 'diplayer-loading-icon',
+      html: LoadHtmlStr
+    })
+    this.bezelIcon = this.createDom({
+      ele: this.bezelIconBox,
+      label: 'span',
+      className: 'iconfont'
+    })
+
     this.controllerMask = this.createDom({
       ele: element,
       label: 'div',
@@ -195,7 +223,11 @@ export default class Dom {
       className: 'dplayer-bar-time hidden',
       text: '00:00'
     })
-    this.createDom({ ele: this.playedBarWrap, label: 'div', className: 'dplayer-bar-preview' })
+    this.playedBarPreview = this.createDom({
+      ele: this.playedBarWrap,
+      label: 'div',
+      className: 'dplayer-bar-preview'
+    })
     const playerBar = this.createDom({
       ele: this.playedBarWrap,
       label: 'div',
@@ -230,6 +262,7 @@ export default class Dom {
       url,
       styles,
       text,
+      html,
       poster,
       preload,
       screenshot,
@@ -237,8 +270,9 @@ export default class Dom {
       webkitPlaysinline
     } = params
     const createEle = document.createElement(label)
-    createEle.className = className!
-    ele.appendChild(createEle)
+    if (className) {
+      createEle.className = className!
+    }
     if (url) {
       createEle.setAttribute('src', url)
     }
@@ -261,8 +295,12 @@ export default class Dom {
       createEle.setAttribute('crossorigin', 'anonymous')
     }
     if (text) {
-      createEle.innerHTML = text
+      createEle.innerText = text
     }
+    if (html) {
+      createEle.innerHTML = html
+    }
+    ele.appendChild(createEle)
     return createEle
   }
 }

@@ -13,6 +13,7 @@ import Bar from './bar'
 import FullScreen from './fullscreen'
 import Controller from './controller'
 import Timer from './timer'
+import Bezel from './bezel'
 
 let index = 0
 const instances: PlayerInterface[] = []
@@ -71,6 +72,7 @@ export default class TPlayer implements PlayerInterface {
     this.video = this.dom.video
 
     this.bar = new Bar(this.dom)
+    this.bezel = new Bezel(this.dom)
 
     this.fullScreen = new FullScreen(this)
     this.controller = new Controller(this)
@@ -325,9 +327,9 @@ export default class TPlayer implements PlayerInterface {
 
   play(): void {
     this.paused = false
-    // if (this.video.paused) {
-    //   this.bezel.switch(Icons.play);
-    // }
+    if (this.video.paused) {
+      this.bezel.switch('iconfont iconplay')
+    }
 
     this.dom.playButtonIco.className = 'iconfont iconpause'
 
@@ -357,9 +359,9 @@ export default class TPlayer implements PlayerInterface {
     this.paused = true
     this.container.classList.remove('dplayer-loading')
 
-    // if (!this.video.paused) {
-    //   this.bezel.switch(Icons.pause);
-    // }
+    if (!this.video.paused) {
+      this.bezel.switch('iconfont iconpause')
+    }
 
     this.dom.playButtonIco.className = 'iconfont iconplay'
     this.video.pause()

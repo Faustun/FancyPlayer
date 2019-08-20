@@ -19,12 +19,12 @@ export default class Thumbnails {
     this.barWidth = barWrapWidth
   }
 
-  show() {
+  show(): void {
     this.container.style.display = 'block'
     this.events && this.events.trigger('thumbnails_show')
   }
 
-  move(position: number) {
+  move(position: number): void {
     this.container.style.backgroundPosition = `-${(Math.ceil((position / this.barWidth) * 100) -
       1) *
       160}px 0`
@@ -34,7 +34,7 @@ export default class Thumbnails {
     )}px`
   }
 
-  hide() {
+  hide(): void {
     this.container.style.display = 'none'
 
     this.events && this.events.trigger('thumbnails_hide')

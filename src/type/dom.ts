@@ -8,6 +8,7 @@ export interface createDomParams {
   url?: string
   styles?: string
   text?: string
+  html?: string
   poster?: string
   preload?: string
   screenshot?: boolean
@@ -16,12 +17,6 @@ export interface createDomParams {
 }
 
 export interface DomInterface {
-  barPreview: HTMLElement
-  barWrap: any
-  qualityList: any
-  camareButton: any
-  subtitleButton: any
-  subtitleButtonInner: any
   container: HTMLElement
   volumeBar: HTMLElement
   volumeBarWrap: HTMLElement
@@ -33,7 +28,7 @@ export interface DomInterface {
   playedBar: HTMLElement
   playedBarWrap: HTMLElement
   playedBarTime: HTMLElement
-  video: HTMLElement
+  video: HTMLMediaElement
   playButton: HTMLElement
   playButtonIco: HTMLElement
   videoWrap: HTMLElement
@@ -45,6 +40,10 @@ export interface DomInterface {
   webFullButton: HTMLElement
   notice: HTMLElement
   volumeIconFont: HTMLElement
+  playedBarPreview: HTMLElement
+  bezelIconBox: HTMLElement
+  bezelIcon: HTMLElement
+  loadingIcon: HTMLElement
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void
   createDom(params: createDomParams): any

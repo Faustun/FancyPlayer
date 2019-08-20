@@ -30,8 +30,6 @@ class Timer implements TimerInterface {
     this.types.map((item: string) => {
       if (item !== 'fps') {
         // this[`init${item}Checker`]();
-        console.log(item)
-        console.log((this as any)[`init${item}Checker`])
         ;(this as any)[`init${item}Checker`]()
       }
       return item

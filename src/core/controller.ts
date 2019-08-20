@@ -65,7 +65,7 @@ export default class Controller {
   }
 
   // 自定义进度条提示点
-  initHighlights() {
+  initHighlights(): void {
     this.player.on('durationchange', () => {
       if (this.player.video.duration !== 1 && this.player.video.duration !== Infinity) {
         if (this.player.options.highlight) {
@@ -93,11 +93,11 @@ export default class Controller {
   }
 
   // 视频缩略图
-  initThumbnails() {
+  initThumbnails(): void {
     if (this.player.options.video.thumbnails) {
       this.thumbnails = new Thumbnails({
-        container: this.player.dom.barPreview,
-        barWidth: this.player.dom.barWrap.offsetWidth,
+        container: this.player.dom.playedBarPreview,
+        barWidth: this.player.dom.playedBarWrap.offsetWidth,
         url: this.player.options.video.thumbnails,
         events: this.player.events
       })
@@ -106,13 +106,13 @@ export default class Controller {
         this.thumbnails!.resize(
           160,
           (this.player.video.videoHeight / this.player.video.videoWidth) * 160,
-          this.player.dom.barWrap.offsetWidth
+          this.player.dom.playedBarWrap.offsetWidth
         )
       })
     }
   }
   //
-  initPlayedBar() {
+  initPlayedBar(): void {
     const thumbMove = (e: Event) => {
       let percentage =
         ((e.clientX || e.changedTouches[0].clientX) -
@@ -186,7 +186,7 @@ export default class Controller {
   }
 
   // 全屏切换
-  initFullButton() {
+  initFullButton(): void {
     this.player.dom.browserFullButton.addEventListener('click', () => {
       this.player.fullScreen.toggle('browser')
     })
@@ -197,7 +197,7 @@ export default class Controller {
   }
 
   // 音量
-  initVolumeButton() {
+  initVolumeButton(): void {
     const vWidth = 35
 
     const volumeMove = (event: Event) => {
@@ -297,7 +297,7 @@ export default class Controller {
   //     }
   // }
 
-  setAutoHide() {
+  setAutoHide(): void {
     this.show()
     clearTimeout(this.autoHideTimer)
     this.autoHideTimer = window.setTimeout(() => {
@@ -307,21 +307,21 @@ export default class Controller {
     }, 3000)
   }
 
-  show() {
+  show(): void {
     this.player.container.classList.remove('dplayer-hide-controller')
   }
 
-  hide() {
+  hide(): void {
     this.player.container.classList.add('dplayer-hide-controller')
     // this.player.setting.hide();
     // this.player.comment && this.player.comment.hide();
   }
 
-  isShow() {
+  isShow(): boolean {
     return !this.player.container.classList.contains('dplayer-hide-controller')
   }
 
-  toggle() {
+  toggle(): void {
     if (this.isShow()) {
       this.hide()
     } else {
@@ -329,7 +329,7 @@ export default class Controller {
     }
   }
 
-  destroy() {
+  destroy(): void {
     clearTimeout(this.autoHideTimer)
   }
 }
