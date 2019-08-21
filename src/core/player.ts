@@ -20,7 +20,7 @@ import Hotkey from './hotkey'
 let index = 0
 const instances: PlayerInterface[] = []
 
-export default class TPlayer implements PlayerInterface {
+export default class Player implements PlayerInterface {
   options: PlayerInterfaceConfig
   qualityVideo?: InterfaceQuality
   qualityIndex?: number

@@ -1,11 +1,11 @@
 {
-  "name": "tplayer",
+  "name": "fancy-player",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/Tplayer.umd.js",
-  "module": "dist/Tplayer.es5.js",
-  "typings": "dist/types/Tplayer.d.ts",
+  "main": "dist/fancy-player.umd.js",
+  "module": "dist/fancy-player.es5.js",
+  "typings": "dist/types/fancy-player.d.ts",
   "files": [
     "dist"
   ],
@@ -24,9 +24,9 @@
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src && npm run build:css:default",
     "start": "rollup -c rollup.config.ts -w",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config examples/webpack.config.js --watch --colors",
-    "build:css:dev": "sass --no-source-map src/css/index.scss examples/TPlayer.css",
-    "build:css:default": "sass --no-source-map src/css/index.scss dist/TPlayer.css",
-    "postbuild:css:default": "postcss --verbose --config postcss.config.js -d dist/ dist/TPlayer.css",
+    "build:css:dev": "sass --no-source-map src/css/index.scss examples/fancy-player.css",
+    "build:css:default": "sass --no-source-map src/css/index.scss dist/fancy-player.css",
+    "postbuild:css:default": "postcss --verbose --config postcss.config.js -d dist/ dist/fancy-player.css",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",

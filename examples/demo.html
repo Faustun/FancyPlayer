@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./TPlayer.css">
-    <script src="../dist/Tplayer.umd.js"></script>
+    <link rel="stylesheet" href="../dist/fancy-player.css">
+    <script src="../dist/fancy-player.umd.js"></script>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         let div = document.createElement('div')
         document.body.appendChild(div)
 
-        tplayer({
+        player({
             container: div,
             video: {
                 url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
