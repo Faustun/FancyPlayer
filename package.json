@@ -12,7 +12,7 @@
   "author": "Songzhiguo <Fu_shide@163.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Faustun/FancyPlayer.git"
   },
   "license": "MIT",
   "engines": {
@@ -21,12 +21,13 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src && npm run build:css:default",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src && npm run build:css:default && npm run copy:fonts",
     "start": "rollup -c rollup.config.ts -w",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config examples/webpack.config.js --watch --colors",
     "build:css:dev": "sass --no-source-map src/css/index.scss examples/fancy-player.css",
     "build:css:default": "sass --no-source-map src/css/index.scss dist/fancy-player.css",
     "postbuild:css:default": "postcss --verbose --config postcss.config.js -d dist/ dist/fancy-player.css",
+    "copy:fonts": "shx cp -R src/css/fonts dist/fonts",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
@@ -36,7 +37,8 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepub": "npm run build"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -116,6 +118,7 @@
     "sass": "^1.22.10",
     "semantic-release": "^15.9.16",
     "shelljs": "^0.8.3",
+    "shx": "^0.3.2",
     "travis-deploy-once": "^5.0.9",
     "ts-jest": "^23.10.2",
     "ts-loader": "^5.3.3",
