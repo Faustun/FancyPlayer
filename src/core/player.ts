@@ -3,6 +3,7 @@ import { PlayerInterface } from '../type/player'
 import { TranInterface } from '../type/i18n'
 import { EventsInterface, PlayerOnCallBack } from '../type/events'
 import { UserInterface } from '../type/user'
+import { BarInterface } from '../type/bar'
 import handleOption from './options'
 import I18n from './i18n'
 import Events from './events'
@@ -29,8 +30,8 @@ export default class TPlayer implements PlayerInterface {
   container: HTMLElement
   arrow: boolean
   dom: any
-  video: HTMLMediaElement
-  bar: any
+  video: HTMLVideoElement
+  bar: BarInterface
   fullScreen: any
   controller: any
   paused?: boolean
@@ -72,7 +73,7 @@ export default class TPlayer implements PlayerInterface {
 
     this.dom = new Dom(this.container, options, this.tran)
 
-    this.video = this.dom.video
+    this.video = this.dom.video as HTMLVideoElement
 
     this.bar = new Bar(this.dom)
     this.bezel = new Bezel(this.dom)
@@ -106,7 +107,7 @@ export default class TPlayer implements PlayerInterface {
     index++
     instances.push(this)
   }
-  initMSE(video: HTMLMediaElement, type: string) {
+  initMSE(video: HTMLVideoElement, type: string) {
     this.type = type
     if (this.options.video.customType && this.options.video.customType[type]) {
       if (
@@ -227,7 +228,7 @@ export default class TPlayer implements PlayerInterface {
       // }
     }
   }
-  initVideo(video: HTMLMediaElement, type: string) {
+  initVideo(video: HTMLVideoElement, type: string) {
     this.initMSE(video, type)
     /**
      * video events
@@ -394,7 +395,8 @@ export default class TPlayer implements PlayerInterface {
       if (!nonotice) {
         this.notice(`${this.tran('Volume')} ${(percentage * 100).toFixed(0)}%`)
       }
-      this.video.volume = percentage + ''
+      ;(this.video as any).volume = percentage
+      // this.video.volume =  percentage
       if (this.video.muted) {
         this.video.muted = false
       }

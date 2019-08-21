@@ -82,8 +82,8 @@ export default class Utils {
     const elementScrollLeft = document.body.scrollLeft + document.documentElement.scrollLeft
     if (
       !document.fullscreenElement &&
-      !document.mozFullScreenElement &&
-      !document.webkitFullscreenElement
+      !(document as any).mozFullScreenElement &&
+      !(document as any).webkitFullscreenElement
     ) {
       while (current !== null) {
         actualLeft += current.offsetLeft

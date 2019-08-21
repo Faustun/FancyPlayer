@@ -67,10 +67,13 @@ export default class Controller {
   // 自定义进度条提示点
   initHighlights(): void {
     this.player.on('durationchange', () => {
-      if (this.player.video.duration !== 1 && this.player.video.duration !== Infinity) {
+      if (
+        (this.player.video as HTMLVideoElement).duration !== 1 &&
+        (this.player.video as HTMLVideoElement).duration !== Infinity
+      ) {
         if (this.player.options.highlight) {
           const highlights = document.querySelectorAll('.dplayer-highlight')
-          ;[].slice.call(highlights, 0).forEach(item => {
+          ;[].slice.call(highlights, 0).forEach((item: Element) => {
             this.player.dom.playedBarWrap.removeChild(item)
           })
           for (let i = 0; i < this.player.options.highlight.length; i++) {
@@ -80,7 +83,10 @@ export default class Controller {
             const p = document.createElement('div')
             p.classList.add('dplayer-highlight')
             p.style.left =
-              (this.player.options.highlight[i].time / this.player.video.duration) * 100 + '%'
+              (this.player.options.highlight[i].time /
+                (this.player.video as HTMLVideoElement).duration) *
+                100 +
+              '%'
             p.innerHTML =
               '<span class="dplayer-highlight-text">' +
               this.player.options.highlight[i].text +
@@ -105,7 +111,9 @@ export default class Controller {
       this.player.on('loadedmetadata', () => {
         this.thumbnails!.resize(
           160,
-          (this.player.video.videoHeight / this.player.video.videoWidth) * 160,
+          ((this.player.video as HTMLVideoElement).videoHeight /
+            (this.player.video as HTMLVideoElement).videoWidth) *
+            160,
           this.player.dom.playedBarWrap.offsetWidth
         )
       })
@@ -113,7 +121,7 @@ export default class Controller {
   }
   //
   initPlayedBar(): void {
-    const thumbMove = (e: Event) => {
+    const thumbMove = (e: any) => {
       let percentage =
         ((e.clientX || e.changedTouches[0].clientX) -
           Utils.getBoundingClientRectViewLeft(this.player.dom.playedBarWrap)) /
@@ -121,10 +129,12 @@ export default class Controller {
       percentage = Math.max(percentage, 0)
       percentage = Math.min(percentage, 1)
       this.player.bar.set('played', percentage, 'width')
-      this.player.dom.ptime.innerHTML = Utils.secondToTime(percentage * this.player.video.duration)
+      this.player.dom.ptime.innerHTML = Utils.secondToTime(
+        percentage * (this.player.video as HTMLVideoElement).duration
+      )
     }
 
-    const thumbUp = (e: Event) => {
+    const thumbUp = (e: any) => {
       document.removeEventListener(Utils.nameMap.dragEnd, thumbUp)
       document.removeEventListener(Utils.nameMap.dragMove, thumbMove)
       let percentage =
@@ -134,7 +144,9 @@ export default class Controller {
       percentage = Math.max(percentage, 0)
       percentage = Math.min(percentage, 1)
       this.player.bar.set('played', percentage, 'width')
-      this.player.seek(this.player.bar.get('played') * this.player.video.duration)
+      this.player.seek(
+        this.player.bar.get('played') * (this.player.video as HTMLVideoElement).duration
+      )
       this.player.timer.enable('progress')
     }
 
@@ -144,14 +156,16 @@ export default class Controller {
       document.addEventListener(Utils.nameMap.dragEnd, thumbUp)
     })
 
-    this.player.dom.playedBarWrap.addEventListener(Utils.nameMap.dragMove, e => {
-      if (this.player.video.duration) {
+    this.player.dom.playedBarWrap.addEventListener(Utils.nameMap.dragMove, (e: any) => {
+      if ((this.player.video as HTMLVideoElement).duration) {
         const px = Utils.cumulativeOffset(this.player.dom.playedBarWrap).left
         const tx = (e.clientX || e.changedTouches[0].clientX) - px
         if (tx < 0 || tx > this.player.dom.playedBarWrap.offsetWidth) {
           return
         }
-        const time = this.player.video.duration * (tx / this.player.dom.playedBarWrap.offsetWidth)
+        const time =
+          (this.player.video as HTMLVideoElement).duration *
+          (tx / this.player.dom.playedBarWrap.offsetWidth)
         if (Utils.isMobile) {
           this.thumbnails && this.thumbnails.show()
         }
@@ -170,14 +184,14 @@ export default class Controller {
 
     if (!Utils.isMobile) {
       this.player.dom.playedBarWrap.addEventListener('mouseenter', () => {
-        if (this.player.video.duration) {
+        if ((this.player.video as HTMLVideoElement).duration) {
           this.thumbnails && this.thumbnails.show()
           this.player.dom.playedBarTime.classList.remove('hidden')
         }
       })
 
       this.player.dom.playedBarWrap.addEventListener('mouseleave', () => {
-        if (this.player.video.duration) {
+        if ((this.player.video as HTMLVideoElement).duration) {
           this.thumbnails && this.thumbnails.hide()
           this.player.dom.playedBarTime.classList.add('hidden')
         }
@@ -200,7 +214,7 @@ export default class Controller {
   initVolumeButton(): void {
     const vWidth = 35
 
-    const volumeMove = (event: Event) => {
+    const volumeMove = (event: any) => {
       const e = event || window.event
       const percentage =
         ((e.clientX || e.changedTouches[0].clientX) -
@@ -216,7 +230,7 @@ export default class Controller {
     }
 
     this.player.dom.volumeBarWrapWrap.addEventListener('click', event => {
-      const e = event || window.event
+      const e: any = event || window.event
       const percentage =
         ((e.clientX || e.changedTouches[0].clientX) -
           Utils.getBoundingClientRectViewLeft(this.player.dom.volumeBarWrap) -
@@ -230,12 +244,12 @@ export default class Controller {
       this.player.dom.volumeButton.classList.add('dplayer-volume-active')
     })
     this.player.dom.volumeButtonIcon.addEventListener('click', () => {
-      if (this.player.video.muted) {
-        this.player.video.muted = false
+      if ((this.player.video as HTMLVideoElement).muted) {
+        ;(this.player.video as HTMLVideoElement).muted = false
         this.player.switchVolumeIcon()
         this.player.bar.set('volume', this.player.volume(), 'width')
       } else {
-        this.player.video.muted = true
+        ;(this.player.video as HTMLVideoElement).muted = true
         this.player.dom.volumeIconFont.className = 'iconfont iconvolume-off'
         this.player.bar.set('volume', 0, 'width')
       }
@@ -301,7 +315,11 @@ export default class Controller {
     this.show()
     clearTimeout(this.autoHideTimer)
     this.autoHideTimer = window.setTimeout(() => {
-      if (this.player.video.played.length && !this.player.paused && !this.disableAutoHide) {
+      if (
+        (this.player.video as HTMLVideoElement).played.length &&
+        !this.player.paused &&
+        !this.disableAutoHide
+      ) {
         this.hide()
       }
     }, 3000)

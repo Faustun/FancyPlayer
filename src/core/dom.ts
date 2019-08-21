@@ -14,7 +14,7 @@ export default class Dom {
   playedBar?: HTMLElement
   playedBarWrap?: HTMLElement
   playedBarTime?: HTMLElement
-  video?: HTMLMediaElement
+  video?: HTMLVideoElement
   playButton?: HTMLElement
   playButtonIco?: HTMLElement
   videoWrap?: HTMLElement
@@ -43,7 +43,7 @@ export default class Dom {
     // 视频
     if (video) {
       const { url = '', pic = '' } = video
-      this.video = this.createDom({
+      this.video = this.createMediaDom({
         ele: this.videoWrap,
         label: 'video',
         className: 'dplayer-video dplayer-video-current',
@@ -254,30 +254,24 @@ export default class Dom {
     this.notice = this.createDom({ ele: element, label: 'div', className: 'dplayer-notice' })
   }
 
-  createDom(params: createDomParams): any {
+  createMediaDom(params: createDomParams): HTMLVideoElement {
     const {
       label,
       className,
       ele,
       url,
-      styles,
-      text,
-      html,
       poster,
       preload,
       screenshot,
       playsinline,
       webkitPlaysinline
     } = params
-    const createEle = document.createElement(label)
+    const createEle = document.createElement(label) as HTMLVideoElement
     if (className) {
       createEle.className = className!
     }
     if (url) {
       createEle.setAttribute('src', url)
-    }
-    if (styles) {
-      createEle.setAttribute('style', styles)
     }
     if (preload) {
       createEle.setAttribute('preload', preload)
@@ -293,6 +287,22 @@ export default class Dom {
     }
     if (screenshot) {
       createEle.setAttribute('crossorigin', 'anonymous')
+    }
+    ele.appendChild(createEle)
+    return createEle
+  }
+
+  createDom(params: createDomParams): HTMLElement {
+    const { label, className, ele, url, styles, text, html } = params
+    const createEle = document.createElement(label)
+    if (className) {
+      createEle.className = className!
+    }
+    if (url) {
+      createEle.setAttribute('src', url)
+    }
+    if (styles) {
+      createEle.setAttribute('style', styles)
     }
     if (text) {
       createEle.innerText = text

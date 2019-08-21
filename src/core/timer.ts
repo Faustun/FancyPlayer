@@ -43,12 +43,20 @@ class Timer implements TimerInterface {
     this.loadingChecker = window.setInterval(() => {
       if (this.enableloadingChecker) {
         // whether the video is buffering
-        currentPlayPos = this.player.video.currentTime
-        if (!bufferingDetected && currentPlayPos === lastPlayPos && !this.player.video.paused) {
+        currentPlayPos = (this.player.video as HTMLVideoElement).currentTime
+        if (
+          !bufferingDetected &&
+          currentPlayPos === lastPlayPos &&
+          !(this.player.video as HTMLVideoElement).paused
+        ) {
           this.player.container.classList.add('dplayer-loading')
           bufferingDetected = true
         }
-        if (bufferingDetected && currentPlayPos > lastPlayPos && !this.player.video.paused) {
+        if (
+          bufferingDetected &&
+          currentPlayPos > lastPlayPos &&
+          !(this.player.video as HTMLVideoElement).paused
+        ) {
           this.player.container.classList.remove('dplayer-loading')
           bufferingDetected = false
         }

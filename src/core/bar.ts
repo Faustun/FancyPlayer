@@ -1,7 +1,8 @@
-import { Elements } from '../type/bar'
+import { Elements, BarInterface } from '../type/bar'
 
-export default class Bar {
+export default class Bar implements BarInterface {
   elements: Elements
+
   constructor(dom: any) {
     this.elements = {
       volume: dom.volumeBar,
@@ -17,13 +18,13 @@ export default class Bar {
    * @param {Number} percentage
    * @param {String} direction - Point out the direction of this bar, Should be height or width
    */
-  set(type: string, percentage: number, direction: string) {
+  set(type: string, percentage: number, direction: string): void {
     percentage = Math.max(percentage, 0)
     percentage = Math.min(percentage, 1)
     this.elements[type].style[direction] = percentage * 100 + '%'
   }
 
-  get(type: string) {
+  get(type: string): number {
     return parseFloat(this.elements[type].style.width) / 100
   }
 }

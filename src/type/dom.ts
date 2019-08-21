@@ -28,7 +28,7 @@ export interface DomInterface {
   playedBar: HTMLElement
   playedBarWrap: HTMLElement
   playedBarTime: HTMLElement
-  video: HTMLMediaElement
+  video: HTMLVideoElement
   playButton: HTMLElement
   playButtonIco: HTMLElement
   videoWrap: HTMLElement

@@ -1,7 +1,10 @@
 import { PlayerInterface } from '../type/player'
 
 class HotKey {
+  video: HTMLVideoElement
+
   constructor(player: PlayerInterface) {
+    this.video = player.video as HTMLVideoElement
     if (player.options.hotkey) {
       document.addEventListener('keydown', e => {
         if (player.focus) {
@@ -17,12 +20,12 @@ class HotKey {
                 break
               case 37:
                 event.preventDefault()
-                player.seek(player.video.currentTime - 5)
+                player.seek(this.video.currentTime - 5)
                 player.controller.setAutoHide()
                 break
               case 39:
                 event.preventDefault()
-                player.seek(player.video.currentTime + 5)
+                player.seek(this.video.currentTime + 5)
                 player.controller.setAutoHide()
                 break
               case 38:
