@@ -63,7 +63,7 @@ export default class FullScreen {
           (document as any).msFullscreenElement
         )
       case 'web':
-        return this.player.container.classList.contains('dplayer-fulled')
+        return Utils.classList.hasClass(this.player.container, 'dplayer-fulled')
     }
   }
 
@@ -92,8 +92,8 @@ export default class FullScreen {
         }
         break
       case 'web':
-        this.player.container.classList.add('dplayer-fulled')
-        document.body.classList.add('dplayer-web-fullscreen-fix')
+        Utils.classList.addClass(this.player.container, 'dplayer-fulled')
+        Utils.classList.addClass(document.body, 'dplayer-web-fullscreen-fix')
         this.player.events.trigger('webfullscreen')
         break
     }
@@ -121,8 +121,8 @@ export default class FullScreen {
         }
         break
       case 'web':
-        this.player.container.classList.remove('dplayer-fulled')
-        document.body.classList.remove('dplayer-web-fullscreen-fix')
+        Utils.classList.removeClass(this.player.container, 'dplayer-fulled')
+        Utils.classList.removeClass(document.body, 'dplayer-web-fullscreen-fix')
         this.player.events.trigger('webfullscreen_cancel')
         break
     }

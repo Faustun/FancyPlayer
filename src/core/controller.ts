@@ -81,7 +81,7 @@ export default class Controller {
               continue
             }
             const p = document.createElement('div')
-            p.classList.add('dplayer-highlight')
+            Utils.classList.addClass(p, 'dplayer-highlight')
             p.style.left =
               (this.player.options.highlight[i].time /
                 (this.player.video as HTMLVideoElement).duration) *
@@ -172,7 +172,7 @@ export default class Controller {
         this.thumbnails && this.thumbnails.move(tx)
         this.player.dom.playedBarTime.style.left = `${tx - (time >= 3600 ? 25 : 20)}px`
         this.player.dom.playedBarTime.innerText = Utils.secondToTime(time)
-        this.player.dom.playedBarTime.classList.remove('hidden')
+        Utils.classList.removeClass(this.player.dom.playedBarTime, 'hidden')
       }
     })
 
@@ -186,14 +186,14 @@ export default class Controller {
       this.player.dom.playedBarWrap.addEventListener('mouseenter', () => {
         if ((this.player.video as HTMLVideoElement).duration) {
           this.thumbnails && this.thumbnails.show()
-          this.player.dom.playedBarTime.classList.remove('hidden')
+          Utils.classList.removeClass(this.player.dom.playedBarTime, 'hidden')
         }
       })
 
       this.player.dom.playedBarWrap.addEventListener('mouseleave', () => {
         if ((this.player.video as HTMLVideoElement).duration) {
           this.thumbnails && this.thumbnails.hide()
-          this.player.dom.playedBarTime.classList.add('hidden')
+          Utils.classList.addClass(this.player.dom.playedBarTime, 'hidden')
         }
       })
     }
@@ -226,7 +226,7 @@ export default class Controller {
     const volumeUp = () => {
       document.removeEventListener(Utils.nameMap.dragEnd, volumeUp)
       document.removeEventListener(Utils.nameMap.dragMove, volumeMove)
-      this.player.dom.volumeButton.classList.remove('dplayer-volume-active')
+      Utils.classList.removeClass(this.player.dom.volumeButton, 'dplayer-volume-active')
     }
 
     this.player.dom.volumeBarWrapWrap.addEventListener('click', event => {
@@ -241,7 +241,7 @@ export default class Controller {
     this.player.dom.volumeBarWrapWrap.addEventListener(Utils.nameMap.dragStart, () => {
       document.addEventListener(Utils.nameMap.dragMove, volumeMove)
       document.addEventListener(Utils.nameMap.dragEnd, volumeUp)
-      this.player.dom.volumeButton.classList.add('dplayer-volume-active')
+      Utils.classList.addClass(this.player.dom.volumeButton, 'dplayer-volume-active')
     })
     this.player.dom.volumeButtonIcon.addEventListener('click', () => {
       if ((this.player.video as HTMLVideoElement).muted) {
@@ -326,17 +326,17 @@ export default class Controller {
   }
 
   show(): void {
-    this.player.container.classList.remove('dplayer-hide-controller')
+    Utils.classList.removeClass(this.player.container, 'dplayer-hide-controller')
   }
 
   hide(): void {
-    this.player.container.classList.add('dplayer-hide-controller')
+    Utils.classList.addClass(this.player.container, 'dplayer-hide-controller')
     // this.player.setting.hide();
     // this.player.comment && this.player.comment.hide();
   }
 
   isShow(): boolean {
-    return !this.player.container.classList.contains('dplayer-hide-controller')
+    return !Utils.classList.hasClass(this.player.container, 'dplayer-hide-controller')
   }
 
   toggle(): void {

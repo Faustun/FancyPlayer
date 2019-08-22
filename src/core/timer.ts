@@ -1,5 +1,6 @@
 import { PlayerInterface } from '../type/player'
 import { TimerInterface } from '../type/timer'
+import Utils from '../helpers/utils'
 
 class Timer implements TimerInterface {
   player: PlayerInterface
@@ -49,7 +50,7 @@ class Timer implements TimerInterface {
           currentPlayPos === lastPlayPos &&
           !(this.player.video as HTMLVideoElement).paused
         ) {
-          this.player.container.classList.add('dplayer-loading')
+          Utils.classList.addClass(this.player.container, 'dplayer-loading')
           bufferingDetected = true
         }
         if (
@@ -57,7 +58,7 @@ class Timer implements TimerInterface {
           currentPlayPos > lastPlayPos &&
           !(this.player.video as HTMLVideoElement).paused
         ) {
-          this.player.container.classList.remove('dplayer-loading')
+          Utils.classList.removeClass(this.player.container, 'dplayer-loading')
           bufferingDetected = false
         }
         lastPlayPos = currentPlayPos

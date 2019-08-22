@@ -1,4 +1,5 @@
 import { DomInterface } from '../type/dom'
+import Utils from '../helpers/utils'
 
 class Bezel {
   dom: DomInterface
@@ -6,13 +7,13 @@ class Bezel {
     this.dom = dom
 
     this.dom.bezelIconBox.addEventListener('animationend', () => {
-      this.dom.bezelIconBox.classList.remove('dplayer-bezel-transition')
+      Utils.classList.removeClass(this.dom.bezelIconBox, 'dplayer-bezel-transition')
     })
   }
 
   switch(className: string) {
     this.dom.bezelIcon.className = className
-    this.dom.bezelIconBox.classList.add('dplayer-bezel-transition')
+    Utils.classList.addClass(this.dom.bezelIconBox, 'dplayer-bezel-transition')
   }
 }
 

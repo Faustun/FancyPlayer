@@ -55,20 +55,19 @@ export default class Player implements PlayerInterface {
     this.user = new User(this)
 
     this.container = this.options.container
-
-    this.container.classList.add('dplayer')
+    Utils.classList.addClass(this.container, 'dplayer')
     if (!this.options.danmaku) {
-      this.container.classList.add('dplayer-no-danmaku')
+      Utils.classList.addClass(this.container, 'dplayer-no-danmaku')
     }
     if (this.options.live) {
-      this.container.classList.add('dplayer-live')
+      Utils.classList.addClass(this.container, 'dplayer-live')
     }
     if (Utils.isMobile) {
-      this.container.classList.add('dplayer-mobile')
+      Utils.classList.addClass(this.container, 'dplayer-mobile')
     }
     this.arrow = this.container.offsetWidth <= 500
     if (this.arrow) {
-      this.container.classList.add('dplayer-arrow')
+      Utils.classList.addClass(this.container, 'dplayer-arrow')
     }
 
     this.dom = new Dom(this.container, options, this.tran)
@@ -343,8 +342,8 @@ export default class Player implements PlayerInterface {
       this.pause()
     })
     this.timer.enable('loading')
-    this.container.classList.remove('dplayer-paused')
-    this.container.classList.add('dplayer-playing')
+    Utils.classList.removeClass(this.container, 'dplayer-paused')
+    Utils.classList.addClass(this.container, 'dplayer-playing')
     if (this.danmaku) {
       this.danmaku.play()
     }
@@ -362,7 +361,7 @@ export default class Player implements PlayerInterface {
    */
   pause(): void {
     this.paused = true
-    this.container.classList.remove('dplayer-loading')
+    Utils.classList.removeClass(this.container, 'dplayer-loading')
 
     if (!this.video.paused) {
       this.bezel.switch('iconfont iconpause')
@@ -371,8 +370,8 @@ export default class Player implements PlayerInterface {
     this.dom.playButtonIco.className = 'iconfont iconplay'
     this.video.pause()
     this.timer.disable('loading')
-    this.container.classList.remove('dplayer-playing')
-    this.container.classList.add('dplayer-paused')
+    Utils.classList.removeClass(this.container, 'dplayer-playing')
+    Utils.classList.addClass(this.container, 'dplayer-paused')
     if (this.danmaku) {
       this.danmaku.pause()
     }
