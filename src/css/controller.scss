@@ -1,3 +1,6 @@
+$barHeight: 10px;
+$highlightHover: 20px;
+
 .dplayer-controller-mask {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
   height: 98px;
@@ -33,7 +36,7 @@
     position: absolute;
     bottom: 33px;
     width: calc(100% - 40px);
-    height: 3px;
+    height: $barHeight;
 
     &:hover {
       .dplayer-bar .dplayer-played .dplayer-thumb {
@@ -44,8 +47,8 @@
         display: block;
         width: 8px;
         transform: translateX(-4px);
-        top: 4px;
-        height: 40%;
+        top: 0;
+        height: $highlightHover;
       }
     }
 
@@ -54,7 +57,7 @@
       position: absolute;
       top: 5px;
       width: 6px;
-      height: 20%;
+      height: $barHeight;
       border-radius: 6px;
       background-color: #fff;
       text-align: center;
@@ -130,7 +133,7 @@
 
     .dplayer-bar {
       position: relative;
-      height: 3px;
+      height: $barHeight;
       width: 100%;
       background: rgba(255, 255, 255, .2);
       cursor: pointer;
@@ -141,7 +144,7 @@
         top: 0;
         bottom: 0;
         background: rgba(255, 255, 255, .4);
-        height: 3px;
+        height: $barHeight;
         transition: all 0.5s ease;
         will-change: width;
       }
@@ -151,7 +154,7 @@
         left: 0;
         top: 0;
         bottom: 0;
-        height: 3px;
+        height: $barHeight;
         will-change: width;
 
         .dplayer-thumb {
