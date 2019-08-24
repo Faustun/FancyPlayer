@@ -6,7 +6,7 @@ export default (options: PlayerInterfaceConfig): PlayerInterfaceConfig => {
     container: options.container || document.getElementsByClassName('dplayer')[0],
     live: false,
     autoplay: false,
-    theme: '#b7daff',
+    theme: '#4588bf',
     loop: false,
     lang: 'zh-cn',
     screenshot: false,

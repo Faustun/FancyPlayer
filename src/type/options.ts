@@ -36,3 +36,8 @@ export interface InterfaceQuality {
   url: string
   type: string
 }
+
+export interface InterfaceHighlights {
+  time: number
+  label?: string
+}

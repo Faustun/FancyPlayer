@@ -468,33 +468,37 @@
   padding: 5px 0;
   cursor: pointer;
   position: absolute;
-  bottom: 33px;
+  bottom: 60px;
   width: calc(100% - 40px);
-  height: 10px;
+  height: 6px;
 }
 .dplayer-controller .dplayer-bar-wrap:hover .dplayer-bar .dplayer-played .dplayer-thumb {
   transform: scale(1);
 }
-.dplayer-controller .dplayer-bar-wrap:hover .dplayer-highlight {
-  display: block;
-  width: 8px;
-  transform: translateX(-4px);
-  top: 0;
-  height: 20px;
+.dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-large {
+  z-index: 12;
+  position: absolute;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #4588bf;
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  transform: translateX(-7px);
+  transition: all 0.2s ease-in-out;
 }
-.dplayer-controller .dplayer-bar-wrap .dplayer-highlight {
+.dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-small {
   z-index: 12;
   position: absolute;
   top: 5px;
-  width: 6px;
-  height: 10px;
-  border-radius: 6px;
-  background-color: #fff;
+  width: 2px;
+  height: 6px;
   text-align: center;
-  transform: translateX(-3px);
+  transform: translateX(-50%);
   transition: all 0.2s ease-in-out;
 }
-.dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover .dplayer-highlight-text {
+.dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover .dplayer-highlight-img {
   display: block;
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover ~ .dplayer-bar-preview {
@@ -503,13 +507,24 @@
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover ~ .dplayer-bar-time {
   opacity: 0;
 }
-.dplayer-controller .dplayer-bar-wrap .dplayer-highlight .dplayer-highlight-text {
+.dplayer-controller .dplayer-bar-wrap .dplayer-highlight .dplayer-highlight-img {
   display: none;
   position: absolute;
   left: 50%;
-  top: -24px;
+  top: -140px;
   padding: 5px 8px;
-  background-color: rgba(0, 0, 0, 0.62);
+  width: 100px;
+  height: 100px;
+  background-color: rgba(98, 96, 97, 0.62);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  transform: translateX(-50%);
+}
+.dplayer-controller .dplayer-bar-wrap .dplayer-highlight-label {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
   color: #fff;
   border-radius: 4px;
   font-size: 12px;
@@ -552,7 +567,7 @@
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-bar {
   position: relative;
-  height: 10px;
+  height: 6px;
   width: 100%;
   background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
@@ -563,7 +578,7 @@
   top: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.4);
-  height: 10px;
+  height: 6px;
   transition: all 0.5s ease;
   will-change: width;
 }
@@ -572,17 +587,15 @@
   left: 0;
   top: 0;
   bottom: 0;
-  height: 10px;
+  height: 6px;
   will-change: width;
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-played .dplayer-thumb {
   position: absolute;
-  top: 0;
-  right: 5px;
-  margin-top: -4px;
-  margin-right: -10px;
-  height: 11px;
-  width: 11px;
+  top: -5px;
+  right: -8px;
+  height: 16px;
+  width: 16px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;

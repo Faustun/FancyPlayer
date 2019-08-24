@@ -287,9 +287,18 @@ export default class Player implements PlayerInterface {
     this.on('timeupdate', () => {
       this.bar.set('played', this.video.currentTime / this.video.duration, 'width')
       const currentTime = Utils.secondToTime(this.video.currentTime)
+      const nodeSmall = document.querySelectorAll('.node-small')
       if (this.dom.ptime.innerHTML !== currentTime) {
         this.dom.ptime.innerHTML = currentTime
       }
+      ;[].slice.call(nodeSmall, 0).forEach((item: HTMLElement) => {
+        const widthItem = parseFloat(item.style.left!) / 100
+        if (widthItem < this.bar.get('played')) {
+          item.style.backgroundColor = '#fff'
+        } else {
+          item.style.backgroundColor = this.options.theme!
+        }
+      })
     })
 
     for (let i = 0; i < this.events.videoEvents.length; i++) {

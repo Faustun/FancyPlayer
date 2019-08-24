@@ -2,6 +2,7 @@ import Utils from '../helpers/utils'
 import Thumbnails from './thumbnails'
 
 import { PlayerInterface } from '../type/player'
+import { InterfaceHighlights } from '../type/options'
 
 export default class Controller {
   player: PlayerInterface
@@ -67,31 +68,51 @@ export default class Controller {
   // 自定义进度条提示点
   initHighlights(): void {
     this.player.on('durationchange', () => {
-      if (
-        (this.player.video as HTMLVideoElement).duration !== 1 &&
-        (this.player.video as HTMLVideoElement).duration !== Infinity
-      ) {
-        if (this.player.options.highlight) {
+      const duration = (this.player.video as HTMLVideoElement).duration
+      const highlightOptions = this.player.options.highlight
+
+      if (duration !== 1 && duration !== Infinity) {
+        if (highlightOptions) {
           const highlights = document.querySelectorAll('.dplayer-highlight')
           ;[].slice.call(highlights, 0).forEach((item: Element) => {
             this.player.dom.playedBarWrap.removeChild(item)
           })
-          for (let i = 0; i < this.player.options.highlight.length; i++) {
-            if (!this.player.options.highlight[i].text || !this.player.options.highlight[i].time) {
-              continue
+          let parentHighlights: InterfaceHighlights[] = []
+          for (let i = 0; i < highlightOptions.length; i++) {
+            const highlightNode = document.createElement('div') as HTMLElement
+            if (!highlightOptions[i].label) {
+              Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-small')
+              highlightNode.style.backgroundColor = this.player.options.theme!
+            } else {
+              parentHighlights.push(highlightOptions[i])
+              Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
+              highlightNode.style.borderColor = this.player.options.theme!
             }
-            const p = document.createElement('div')
-            Utils.classList.addClass(p, 'dplayer-highlight')
-            p.style.left =
-              (this.player.options.highlight[i].time /
-                (this.player.video as HTMLVideoElement).duration) *
-                100 +
-              '%'
-            p.innerHTML =
-              '<span class="dplayer-highlight-text">' +
-              this.player.options.highlight[i].text +
-              '</span>'
-            this.player.dom.playedBarWrap.insertBefore(p, this.player.dom.playedBarTime)
+            highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
+
+            highlightNode.innerHTML = `<div class="dplayer-highlight-img">${highlightOptions[i].text}</div>
+                `
+            this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
+          }
+          for (let i = 0; i < parentHighlights.length; i++) {
+            let labelNode = document.createElement('div') as HTMLElement
+            Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
+            labelNode.innerText = parentHighlights[i].label!
+            if (i + 1 < parentHighlights.length) {
+              labelNode!.style.left =
+                ((parentHighlights[i + 1].time / duration - parentHighlights[i].time / duration) /
+                  2 +
+                  parentHighlights[i].time / duration) *
+                  100 +
+                '%'
+            } else if (i + 1 === parentHighlights.length) {
+              labelNode!.style.left =
+                ((1 - parentHighlights[i].time / duration) / 2 +
+                  parentHighlights[i].time / duration) *
+                  100 +
+                '%'
+            }
+            this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
           }
         }
       }

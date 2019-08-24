@@ -11,17 +11,40 @@ Player({
     },
     highlight: [
         {
-            time: 20,
-            text: '这是第 20 秒',
+            time: 0,
+            label: '情景引入',
         },
         {
-            son: true,
+            time: 20,
+        },
+        {
+            time: 30,
+        },
+        {
+            time: 50,
+            label: '科普讲解'
+        },
+        {
+            time: 60,
+        },
+        {
+            time: 90,
+        },
+        {
             time: 120,
-            text: '这是 2 分钟'
+            label: '创意搭建'
+        },
+        {
+            time: 140,
+            label: '思维编程'
         },
         {
             time: 180,
-            text: '这是 2 分钟'
+            label: '扩展进阶'
+        },
+        {
+            time: 200,
+            label: '总结分享'
         }
     ]
 })
