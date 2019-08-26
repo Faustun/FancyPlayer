@@ -6,45 +6,55 @@ document.body.appendChild(div)
 Player({
     container: div,
     video: {
-        url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
-        pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png'
+        url: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4',
+        pic: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/0'
     },
     highlight: [
         {
             time: 0,
             label: '情景引入',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
         },
         {
             time: 20,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/21/w/120/h/90'
         },
         {
             time: 30,
-        },
-        {
-            time: 50,
-            label: '科普讲解'
-        },
-        {
-            time: 60,
-        },
-        {
-            time: 90,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/31/w/120/h/90'
         },
         {
             time: 120,
-            label: '创意搭建'
+            label: '科普讲解',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/121/w/120/h/90'
         },
         {
-            time: 140,
-            label: '思维编程'
+            time: 660,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/61/w/120/h/90'
         },
         {
-            time: 180,
-            label: '扩展进阶'
+            time: 680,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/91/w/480/h/90'
         },
         {
-            time: 200,
-            label: '总结分享'
+            time: 320,
+            label: '创意搭建',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/321/w/120/h/90'
+        },
+        {
+            time: 400,
+            label: '思维编程',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/401/w/120/h/90'
+        },
+        {
+            time: 500,
+            label: '扩展进阶',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
+        },
+        {
+            time: 600,
+            label: '总结分享',
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/601/w/120/h/90'
         }
     ]
 })

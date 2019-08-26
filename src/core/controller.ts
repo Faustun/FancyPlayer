@@ -90,7 +90,7 @@ export default class Controller {
             }
             highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
 
-            highlightNode.innerHTML = `<div class="dplayer-highlight-img">${highlightOptions[i].text}</div>
+            highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>
                 `
             this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
           }
@@ -184,6 +184,7 @@ export default class Controller {
         if (tx < 0 || tx > this.player.dom.playedBarWrap.offsetWidth) {
           return
         }
+
         const time =
           (this.player.video as HTMLVideoElement).duration *
           (tx / this.player.dom.playedBarWrap.offsetWidth)
@@ -194,6 +195,7 @@ export default class Controller {
         this.player.dom.playedBarTime.style.left = `${tx - (time >= 3600 ? 25 : 20)}px`
         this.player.dom.playedBarTime.innerText = Utils.secondToTime(time)
         Utils.classList.removeClass(this.player.dom.playedBarTime, 'hidden')
+        this._handleThumbnail(tx)
       }
     })
 
@@ -217,6 +219,29 @@ export default class Controller {
           Utils.classList.addClass(this.player.dom.playedBarTime, 'hidden')
         }
       })
+    }
+  }
+
+  private _handleThumbnail(tx: number): void {
+    const halfWidth = 60
+    const barWidth = this.player.dom.playedBarWrap.offsetWidth
+    // const
+    if (tx < halfWidth || tx + halfWidth > barWidth) {
+      const highlights = document.querySelectorAll('.dplayer-highlight')
+      for (let i = 0; i < highlights.length; i++) {
+        const highlight = highlights[i] as HTMLElement
+        const highlightImg = highlight.querySelectorAll('.dplayer-highlight-img')[0] as HTMLElement
+        const styleLeft = (parseFloat(highlight.style.left as string) / 100) * barWidth
+        if (styleLeft < halfWidth) {
+          highlightImg.style.marginLeft = '-' + styleLeft + 'px'
+        }
+        if (styleLeft > barWidth - halfWidth) {
+          console.log(styleLeft)
+          console.log(barWidth - halfWidth)
+          highlightImg.style.marginLeft =
+            '-' + (halfWidth - (barWidth - styleLeft) + halfWidth) + 'px'
+        }
+      }
     }
   }
 
