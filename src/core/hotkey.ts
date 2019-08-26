@@ -20,12 +20,12 @@ class HotKey {
                 break
               case 37:
                 event.preventDefault()
-                player.seek(this.video.currentTime - 5)
+                player.seek(this.video.currentTime - 15)
                 player.controller.setAutoHide()
                 break
               case 39:
                 event.preventDefault()
-                player.seek(this.video.currentTime + 5)
+                player.seek(this.video.currentTime + 15)
                 player.controller.setAutoHide()
                 break
               case 38:

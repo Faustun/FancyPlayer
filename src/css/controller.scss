@@ -34,7 +34,7 @@ $highlightHover: 12px;
     padding: 5px 0;
     cursor: pointer;
     position: absolute;
-    bottom: 60px;
+    bottom: 55px;
     width: calc(100% - 40px);
     height: $barHeight;
 
@@ -83,6 +83,7 @@ $highlightHover: 12px;
           opacity: 0;
         }
       }
+
       .dplayer-highlight-img {
         display: none;
         position: absolute;
@@ -100,6 +101,7 @@ $highlightHover: 12px;
         font-size: 12px;
       }
     }
+
     .dplayer-highlight-label {
       display: inline-block;
       position: absolute;
@@ -345,6 +347,9 @@ $highlightHover: 12px;
     }
 
     &.dplayer-icons-left {
+      left: 50%;
+      transform: translateX(-50%);
+
       .dplayer-icon {
         padding: 7px;
       }
@@ -358,8 +363,58 @@ $highlightHover: 12px;
       }
     }
 
+    .dplayer-double-speed-wrap {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      height: 38px;
+      line-height: 38px;
+      font-size: 16px;
+      color: #fff;
+
+      .dplayer-double-speed {
+        padding: 0 7px;
+      }
+
+      .dplayer-popup-panel {
+        position: absolute;
+        left: 50%;
+        bottom: 72px;
+        transform: scale(0);
+        width: 150px;
+        margin-left: -75px;
+        border-radius: 2px;
+        background: rgba(0, 0, 0, .8);
+        padding: 7px 0;
+        transition: all .3s ease-in-out;
+        overflow: hidden;
+        z-index: 2;
+
+        &.open {
+          transform: scale(1);
+
+          .dplayer-popup-speed-item {
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+          }
+        }
+      }
+    }
+
+
+    .dplayer-time {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+
     .dplayer-time,
     .dplayer-live-badge {
+      display: inline-block;
       line-height: 38px;
       color: #eee;
       text-shadow: 0 0 2px rgba(0, 0, 0, .5);

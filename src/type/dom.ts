@@ -44,6 +44,10 @@ export interface DomInterface {
   bezelIconBox: HTMLElement
   bezelIcon: HTMLElement
   loadingIcon: HTMLElement
+  playFast: HTMLElement
+  playRetreat: HTMLElement
+  doubleSpeed: HTMLElement
+  doubleSpeedPopup: HTMLElement
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void
   createDom(params: createDomParams): any

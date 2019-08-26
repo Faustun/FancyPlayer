@@ -30,6 +30,10 @@ export default class Dom {
   bezelIconBox?: HTMLElement
   bezelIcon?: HTMLElement
   loadingIcon?: HTMLElement
+  playFast?: HTMLElement
+  playRetreat?: HTMLElement
+  doubleSpeed?: HTMLElement
+  doubleSpeedPopup?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -102,6 +106,18 @@ export default class Dom {
       label: 'div',
       className: 'dplayer-icons dplayer-icons-left'
     })
+
+    this.playRetreat = this.createDom({
+      ele: controllerLeft,
+      label: 'button',
+      className: 'dplayer-icon dplayer-retreat'
+    })
+    this.createDom({
+      ele: this.playRetreat,
+      label: 'span',
+      className: 'iconfont iconretreat'
+    })
+
     this.playButton = this.createDom({
       ele: controllerLeft,
       label: 'button',
@@ -113,8 +129,71 @@ export default class Dom {
       className: 'iconfont iconplay'
     })
 
-    this.volumeButton = this.createDom({
+    this.playFast = this.createDom({
       ele: controllerLeft,
+      label: 'button',
+      className: 'dplayer-icon dplayer-fast'
+    })
+    this.createDom({
+      ele: this.playFast,
+      label: 'span',
+      className: 'iconfont iconfast'
+    })
+
+    // 控制右侧
+    const controllerRight = this.createDom({
+      ele: this.controller,
+      label: 'div',
+      className: 'dplayer-icons dplayer-icons-right'
+    })
+
+    const playerTime = this.createDom({
+      ele: controllerRight,
+      label: 'span',
+      className: 'dplayer-time'
+    })
+    this.ptime = this.createDom({
+      ele: playerTime,
+      label: 'span',
+      className: 'dplayer-ptime',
+      text: '0:00'
+    })
+    this.createDom({ ele: playerTime, label: 'span', text: ' / ' })
+    this.dtime = this.createDom({
+      ele: playerTime,
+      label: 'span',
+      className: 'dplayer-dtime',
+      text: '0:00'
+    })
+
+    const doubleSpeed = this.createDom({
+      ele: controllerRight,
+      label: 'div',
+      className: 'dplayer-double-speed-wrap'
+    })
+    this.doubleSpeed = this.createDom({
+      ele: doubleSpeed,
+      text: '倍速',
+      label: 'span',
+      className: 'dplayer-double-speed'
+    })
+    const doubleSpeedStr = `<div class="dplayer-popup-speed-item" data-speed="0.5"><span class="dplayer-label">0.5</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="0.75"><span class="dplayer-label">0.75</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="1"><span class="dplayer-label">倍速</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="1.25"><span class="dplayer-label">1.25</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="1.5"><span class="dplayer-label">1.5</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="1.75"><span class="dplayer-label">1.75</span></div>
+    <div class="dplayer-popup-speed-item" data-speed="2"><span class="dplayer-label">2</span></div>
+    `
+    this.doubleSpeedPopup = this.createDom({
+      ele: doubleSpeed,
+      label: 'div',
+      html: doubleSpeedStr,
+      className: 'dplayer-popup-panel'
+    })
+
+    this.volumeButton = this.createDom({
+      ele: controllerRight,
       label: 'div',
       className: 'dplayer-volume'
     })
@@ -155,32 +234,6 @@ export default class Dom {
       label: 'span',
       className: 'dplayer-thumb',
       styles: `background:${theme}`
-    })
-
-    const playerTime = this.createDom({
-      ele: controllerLeft,
-      label: 'span',
-      className: 'dplayer-time'
-    })
-    this.ptime = this.createDom({
-      ele: playerTime,
-      label: 'span',
-      className: 'dplayer-ptime',
-      text: '0:00'
-    })
-    this.createDom({ ele: playerTime, label: 'span', text: ' / ' })
-    this.dtime = this.createDom({
-      ele: playerTime,
-      label: 'span',
-      className: 'dplayer-dtime',
-      text: '0:00'
-    })
-
-    // 控制右侧
-    const controllerRight = this.createDom({
-      ele: this.controller,
-      label: 'div',
-      className: 'dplayer-icons dplayer-icons-right'
     })
     // 全屏按钮
     const playerFull = this.createDom({

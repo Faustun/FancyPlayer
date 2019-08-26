@@ -30,9 +30,11 @@ export default class Controller {
     }
 
     this.initPlayButton()
+    this.initRetreatAndFast()
     this.initThumbnails()
     this.initPlayedBar()
     this.initFullButton()
+    this.initDoubleSpeed()
     // this.initQualityButton();
     // this.initScreenshotButton();
     // this.initSubtitleButton();
@@ -43,7 +45,7 @@ export default class Controller {
   }
 
   // 播放按钮
-  initPlayButton() {
+  initPlayButton(): void {
     this.player.dom.playButton.addEventListener('click', () => {
       this.player.toggle()
     })
@@ -63,6 +65,21 @@ export default class Controller {
         this.toggle()
       })
     }
+  }
+  initRetreatAndFast(): void {
+    this.player.dom.playRetreat.addEventListener('click', () => {
+      this.player.seek(this.player.video.currentTime - 15)
+      this.player.controller.setAutoHide()
+    })
+    this.player.dom.playFast.addEventListener('click', () => {
+      this.player.seek(this.player.video.currentTime + 15)
+      this.player.controller.setAutoHide()
+    })
+  }
+  initDoubleSpeed(): void {
+    this.player.dom.doubleSpeed.addEventListener('click', () => {
+      Utils.classList.toggleClass(this.player.dom.doubleSpeedPopup, 'open')
+    })
   }
 
   // 自定义进度条提示点
