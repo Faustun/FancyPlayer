@@ -251,11 +251,11 @@
 }
 .dplayer.dplayer-hide-controller .dplayer-controller-mask {
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(110%);
 }
 .dplayer.dplayer-hide-controller .dplayer-controller {
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(110%);
 }
 .dplayer.dplayer-show-controller .dplayer-controller-mask {
   opacity: 1;
@@ -270,6 +270,10 @@
   top: 0;
   width: 100%;
   height: 100%;
+}
+.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons.dplayer-icons-left {
+  left: 20px;
+  transform: translateX(0);
 }
 .dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-volume,
 .dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-camera-icon {
@@ -440,8 +444,8 @@
 }
 
 .dplayer-controller-mask {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
-  height: 98px;
+  background-color: rgba(98, 102, 105, 0.5);
+  height: 66px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -453,8 +457,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 41px;
-  padding: 0 20px;
+  height: 66px;
   user-select: none;
   transition: all 0.3s ease;
 }
@@ -469,14 +472,15 @@
   cursor: pointer;
   position: absolute;
   bottom: 55px;
-  width: calc(100% - 40px);
+  width: 100%;
   height: 6px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .dplayer-controller .dplayer-bar-wrap:hover .dplayer-bar .dplayer-played .dplayer-thumb {
   transform: scale(1);
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-large {
-  z-index: 12;
+  z-index: 2;
   position: absolute;
   top: 1px;
   width: 10px;
@@ -489,7 +493,7 @@
   transition: all 0.2s ease-in-out;
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-small {
-  z-index: 12;
+  z-index: 2;
   position: absolute;
   top: 5px;
   width: 2px;
@@ -552,8 +556,10 @@
   left: 0px;
   top: -20px;
   border-radius: 4px;
-  padding: 5px 7px;
-  background-color: rgba(0, 0, 0, 0.62);
+  padding: 5px 0;
+  width: 46px;
+  margin-left: -23px;
+  background-color: rgba(98, 102, 105, 0.5);
   color: #fff;
   font-size: 12px;
   text-align: center;
@@ -608,127 +614,6 @@
   position: absolute;
   bottom: 0;
 }
-.dplayer-controller .dplayer-icons.dplayer-comment-box {
-  display: none;
-  position: absolute;
-  transition: all 0.3s ease-in-out;
-  z-index: 2;
-  height: 38px;
-  bottom: 0;
-  left: 20px;
-  right: 20px;
-  color: #fff;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-icon {
-  padding: 7px;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-send-icon {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box {
-  position: absolute;
-  background: rgba(28, 28, 28, 0.9);
-  bottom: 41px;
-  left: 0;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  padding: 10px 10px 16px;
-  font-size: 14px;
-  width: 204px;
-  transition: all 0.3s ease-in-out;
-  transform: scale(0);
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box.dplayer-comment-setting-open {
-  transform: scale(1);
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box input[type=radio] {
-  display: none;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box label {
-  cursor: pointer;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-title {
-  font-size: 13px;
-  color: #fff;
-  line-height: 30px;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type {
-  font-size: 0;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type .dplayer-comment-setting-title {
-  margin-bottom: 6px;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type label:nth-child(2) span {
-  border-radius: 4px 0 0 4px;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type label:nth-child(4) span {
-  border-radius: 0 4px 4px 0;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type span {
-  width: 33%;
-  padding: 4px 6px;
-  line-height: 16px;
-  display: inline-block;
-  font-size: 12px;
-  color: #fff;
-  border: 1px solid #fff;
-  margin-right: -1px;
-  box-sizing: border-box;
-  text-align: center;
-  cursor: pointer;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type input:checked + span {
-  background: #E4E4E6;
-  color: #1c1c1c;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color {
-  font-size: 0;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color label {
-  font-size: 0;
-  padding: 6px;
-  display: inline-block;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color span {
-  width: 22px;
-  height: 22px;
-  display: inline-block;
-  border-radius: 50%;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color span:hover {
-  animation: my-face 5s infinite ease-in-out;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input {
-  outline: none;
-  border: none;
-  padding: 8px 31px;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: center;
-  border-radius: 4px;
-  background: none;
-  margin: 0;
-  height: 100%;
-  box-sizing: border-box;
-  width: 100%;
-  color: #fff;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::placeholder {
-  color: #fff;
-  opacity: 0.8;
-}
-.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::-ms-clear {
-  display: none;
-}
 .dplayer-controller .dplayer-icons.dplayer-icons-left {
   left: 50%;
   transform: translateX(-50%);
@@ -747,24 +632,22 @@
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
+  width: 56px;
   height: 38px;
   line-height: 38px;
+  text-align: center;
   font-size: 16px;
   color: #fff;
-}
-.dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-double-speed {
-  padding: 0 7px;
 }
 .dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel {
   position: absolute;
   left: 50%;
-  bottom: 72px;
+  bottom: 37px;
   transform: scale(0);
-  width: 150px;
-  margin-left: -75px;
-  border-radius: 2px;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 7px 0;
+  width: 80px;
+  margin-left: -40px;
+  border-radius: 4px;
+  background-color: rgba(98, 102, 105, 0.9);
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   z-index: 2;
@@ -772,13 +655,19 @@
 .dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel.open {
   transform: scale(1);
 }
-.dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel.open .dplayer-popup-speed-item {
+.dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel .dplayer-popup-speed-item {
   text-align: center;
   height: 30px;
   line-height: 30px;
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+}
+.dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel .dplayer-popup-speed-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.dplayer-controller .dplayer-icons .dplayer-double-speed-wrap .dplayer-popup-panel .dplayer-popup-speed-item.active {
+  color: #4588bf;
 }
 .dplayer-controller .dplayer-icons .dplayer-time {
   padding-left: 7px;
@@ -825,183 +714,56 @@
 .dplayer-controller .dplayer-icons .dplayer-icon:hover .dplayer-icon-content {
   opacity: 1;
 }
-.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-quality-icon {
-  color: #fff;
-  width: auto;
-  line-height: 22px;
-  font-size: 14px;
-}
-.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-comment-icon {
-  padding: 10px 9px 9px;
-}
-.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-setting-icon {
-  padding-top: 8.5px;
-}
-.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-volume-icon {
-  width: 43px;
-}
 .dplayer-controller .dplayer-icons .dplayer-volume {
   position: relative;
   display: inline-block;
   cursor: pointer;
   height: 100%;
 }
-.dplayer-controller .dplayer-icons .dplayer-volume:hover .dplayer-volume-bar-wrap .dplayer-volume-bar {
-  width: 45px;
-}
-.dplayer-controller .dplayer-icons .dplayer-volume:hover .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-  transform: scale(1);
-}
-.dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap .dplayer-volume-bar {
-  width: 45px;
-}
-.dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
+.dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap {
   transform: scale(1);
 }
 .dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap {
-  display: inline-block;
-  margin: 0 10px 0 -5px;
-  vertical-align: middle;
-  height: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 37px;
+  transform: scale(0);
+  width: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: -20px;
+  border-radius: 4px;
+  background-color: rgba(98, 102, 105, 0.9);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 2;
 }
 .dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar {
   position: relative;
-  top: 17px;
-  width: 0;
-  height: 3px;
-  background: #aaa;
+  height: 60px;
+  width: 6px;
+  margin: 0 auto;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease-in-out;
 }
 .dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 100%;
+  width: 100%;
   transition: all 0.1s ease;
-  will-change: width;
+  will-change: height;
 }
 .dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
   position: absolute;
-  top: 0;
-  right: 5px;
-  margin-top: -4px;
-  margin-right: -10px;
-  height: 11px;
-  width: 11px;
+  top: -6px;
+  left: -3px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  transform: scale(0);
-}
-.dplayer-controller .dplayer-icons .dplayer-subtitle-btn {
-  display: inline-block;
-  height: 100%;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting {
-  display: inline-block;
-  height: 100%;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box {
-  position: absolute;
-  right: 0;
-  bottom: 50px;
-  transform: scale(0);
-  width: 150px;
-  border-radius: 2px;
-  background: rgba(28, 28, 28, 0.9);
-  padding: 7px 0;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
-  z-index: 2;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box > div {
-  display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box > div.dplayer-setting-origin-panel {
-  display: block;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-open {
-  transform: scale(1);
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-narrow {
-  width: 70px;
-  height: 180px;
-  text-align: center;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-speed .dplayer-setting-origin-panel {
-  display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-speed .dplayer-setting-speed-panel {
-  display: block;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-item,
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-speed-item {
-  height: 30px;
-  padding: 5px 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-  position: relative;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-item:hover,
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-speed-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku {
-  padding: 5px 0;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-label {
-  padding: 0 10px;
-  display: inline;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku:hover .dplayer-label {
-  display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku:hover .dplayer-danmaku-bar-wrap {
-  display: inline-block;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku.dplayer-setting-danmaku-active .dplayer-label {
-  display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku.dplayer-setting-danmaku-active .dplayer-danmaku-bar-wrap {
-  display: inline-block;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap {
-  padding: 0 10px;
-  box-sizing: border-box;
-  display: none;
-  vertical-align: middle;
-  height: 100%;
-  width: 100%;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar {
-  position: relative;
-  top: 8.5px;
-  width: 100%;
-  height: 3px;
-  background: #fff;
-  transition: all 0.3s ease-in-out;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar .dplayer-danmaku-bar-inner {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  transition: all 0.1s ease;
-  background: #aaa;
-  will-change: width;
-}
-.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar .dplayer-danmaku-bar-inner .dplayer-thumb {
-  position: absolute;
-  top: 0;
-  right: 5px;
-  margin-top: -4px;
-  margin-right: -10px;
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  background: #aaa;
 }
 .dplayer-controller .dplayer-icons .dplayer-full {
   display: inline-block;
@@ -1016,119 +778,6 @@
   top: -30px;
   z-index: 1;
   display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality {
-  position: relative;
-  display: inline-block;
-  height: 100%;
-  z-index: 2;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality:hover .dplayer-quality-list {
-  display: block;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality:hover .dplayer-quality-mask {
-  display: block;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-mask {
-  display: none;
-  position: absolute;
-  bottom: 38px;
-  left: -18px;
-  width: 80px;
-  padding-bottom: 12px;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-list {
-  display: none;
-  font-size: 12px;
-  width: 80px;
-  border-radius: 2px;
-  background: rgba(28, 28, 28, 0.9);
-  padding: 5px 0;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-item {
-  height: 25px;
-  box-sizing: border-box;
-  cursor: pointer;
-  line-height: 25px;
-}
-.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.dplayer-controller .dplayer-icons .dplayer-comment {
-  display: inline-block;
-  height: 100%;
-}
-.dplayer-controller .dplayer-icons .dplayer-label {
-  color: #eee;
-  font-size: 13px;
-  display: inline-block;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle {
-  width: 32px;
-  height: 20px;
-  text-align: center;
-  font-size: 0;
-  vertical-align: middle;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input {
-  max-height: 0;
-  max-width: 0;
-  display: none;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input + label {
-  display: inline-block;
-  position: relative;
-  box-shadow: #dfdfdf 0 0 0 0 inset;
-  border: 1px solid #dfdfdf;
-  height: 20px;
-  width: 32px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input + label:before {
-  content: "";
-  position: absolute;
-  display: block;
-  height: 18px;
-  width: 18px;
-  top: 0;
-  left: 0;
-  border-radius: 15px;
-  transition: 0.2s ease-in-out;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input + label:after {
-  content: "";
-  position: absolute;
-  display: block;
-  left: 0;
-  top: 0;
-  border-radius: 15px;
-  background: #fff;
-  transition: 0.2s ease-in-out;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  height: 18px;
-  width: 18px;
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input:checked + label {
-  border-color: rgba(255, 255, 255, 0.5);
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input:checked + label:before {
-  width: 30px;
-  background: rgba(255, 255, 255, 0.5);
-}
-.dplayer-controller .dplayer-icons .dplayer-toggle input:checked + label:after {
-  left: 12px;
 }
 
 .dplayer-danmaku {
@@ -1245,7 +894,7 @@
 .dplayer-notice {
   opacity: 0;
   position: absolute;
-  bottom: 60px;
+  bottom: 75px;
   left: 20px;
   font-size: 14px;
   border-radius: 2px;

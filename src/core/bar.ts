@@ -24,7 +24,8 @@ export default class Bar implements BarInterface {
     this.elements[type].style[direction] = percentage * 100 + '%'
   }
 
-  get(type: string): number {
-    return parseFloat(this.elements[type].style.width) / 100
+  get(type: string, direction?: string): number {
+    direction = direction || 'width'
+    return parseFloat(this.elements[type].style[direction]) / 100
   }
 }

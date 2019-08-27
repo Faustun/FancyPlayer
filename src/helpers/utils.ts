@@ -152,9 +152,9 @@ const _nativeClassList = new (class implements IDomClassList {
 
 class Utils {
   static isIE = navigator.userAgent.indexOf('Trident') >= 0
-  static isChrome = navigator.userAgent.indexOf('chrome') >= 0
-  static isFirefox = navigator.userAgent.indexOf('firefox') >= 0
-  static isMobile = navigator.userAgent.indexOf('mobile') >= 0
+  static isChrome = navigator.userAgent.indexOf('Chrome') >= 0
+  static isFirefox = navigator.userAgent.indexOf('Firefox') >= 0
+  static isMobile = navigator.userAgent.indexOf('Mobile') >= 0
 
   static storage = {
     set(key: string, value: any): void {
@@ -204,13 +204,12 @@ class Utils {
     }
   }
 
-  static getBoundingClientRectViewLeft(element: HTMLElement): number {
+  static getBoundingClientRectViewLeftOrTop(element: HTMLElement, direction: string): number {
     const scrollTop =
       window.scrollY ||
       window.pageYOffset ||
       document.body.scrollTop +
         ((document.documentElement && document.documentElement.scrollTop) || 0)
-
     if (element.getBoundingClientRect) {
       if (typeof Utils.offset !== 'number') {
         let temp = document.createElement('div') as HTMLElement | null
@@ -220,10 +219,10 @@ class Utils {
         document.body.removeChild(temp!)
         temp = null
       }
-      const rect = element.getBoundingClientRect()
+      const rect = element.getBoundingClientRect() as any
       const offset = Utils.offset
 
-      return rect.left + offset
+      return rect[direction] + offset
     } else {
       // not support getBoundingClientRect
       return Utils.getElementViewLeft(element)

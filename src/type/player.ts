@@ -30,6 +30,7 @@ export interface PlayerInterface {
   play(): void
   pause(): void
   seek(time: number): void
+  speed(rate: string): void
   toggle(): void
   on(name: string, callback: PlayerOnCallBack): void
   volume(percentage?: number, nostorage?: boolean, nonotice?: boolean): number

@@ -48,6 +48,8 @@ export interface DomInterface {
   playRetreat: HTMLElement
   doubleSpeed: HTMLElement
   doubleSpeedPopup: HTMLElement
+  mask: HTMLElement
+  controllerLeft: HTMLElement
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void
   createDom(params: createDomParams): any

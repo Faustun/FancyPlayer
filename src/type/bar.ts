@@ -10,5 +10,5 @@ export interface BarInterface {
   elements: Elements
 
   set(type: string, percentage: number, direction: string): void
-  get(type: string): number
+  get(type: string, direction?: string): number
 }

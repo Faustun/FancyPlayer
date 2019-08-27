@@ -14,6 +14,10 @@ export default class Controller {
     this.player = player
 
     this.autoHideTimer = 0
+
+    this.player.dom.mask.addEventListener('click', () => {
+      this.maskhide()
+    })
     if (!Utils.isMobile) {
       this.player.container.addEventListener('mousemove', () => {
         this.setAutoHide()
@@ -35,9 +39,6 @@ export default class Controller {
     this.initPlayedBar()
     this.initFullButton()
     this.initDoubleSpeed()
-    // this.initQualityButton();
-    // this.initScreenshotButton();
-    // this.initSubtitleButton();
     this.initHighlights()
     if (!Utils.isMobile) {
       this.initVolumeButton()
@@ -68,18 +69,39 @@ export default class Controller {
   }
   initRetreatAndFast(): void {
     this.player.dom.playRetreat.addEventListener('click', () => {
-      this.player.seek(this.player.video.currentTime - 15)
+      this.player.seek((this.player.video as HTMLVideoElement).currentTime - 15)
       this.player.controller.setAutoHide()
     })
     this.player.dom.playFast.addEventListener('click', () => {
-      this.player.seek(this.player.video.currentTime + 15)
+      this.player.seek((this.player.video as HTMLVideoElement).currentTime + 15)
       this.player.controller.setAutoHide()
     })
   }
   initDoubleSpeed(): void {
+    const doubleSpeeds = document.querySelectorAll('.dplayer-popup-speed-item')
     this.player.dom.doubleSpeed.addEventListener('click', () => {
-      Utils.classList.toggleClass(this.player.dom.doubleSpeedPopup, 'open')
+      const rateText = this.player.dom.doubleSpeed.innerText
+      for (let i = 0; i < doubleSpeeds.length; i++) {
+        const doubleSpeed = doubleSpeeds[i] as HTMLElement
+        let rate = doubleSpeed.dataset.speed
+        rate = rate === '1X' ? '倍速' : rate
+        Utils.classList.removeClass(doubleSpeed, 'active')
+        if (rate === rateText) {
+          Utils.classList.addClass(doubleSpeed, 'active')
+        }
+      }
+      this.maskShow()
     })
+
+    for (let i = 0; i < doubleSpeeds.length; i++) {
+      doubleSpeeds[i].addEventListener('click', () => {
+        const rate = (doubleSpeeds[i] as HTMLElement).dataset.speed
+        const rateText = rate === '1X' ? '倍速' : rate
+        this.player.speed(rate!)
+        this.player.dom.doubleSpeed.innerText = rateText!
+        this.maskhide()
+      })
+    }
   }
 
   // 自定义进度条提示点
@@ -87,8 +109,7 @@ export default class Controller {
     this.player.on('durationchange', () => {
       const duration = (this.player.video as HTMLVideoElement).duration
       const highlightOptions = this.player.options.highlight
-
-      if (duration !== 1 && duration !== Infinity) {
+      if (duration !== 1 && duration !== 0 && duration !== Infinity) {
         if (highlightOptions) {
           const highlights = document.querySelectorAll('.dplayer-highlight')
           ;[].slice.call(highlights, 0).forEach((item: Element) => {
@@ -160,9 +181,10 @@ export default class Controller {
   //
   initPlayedBar(): void {
     const thumbMove = (e: any) => {
+      const clientX = typeof e.clientX !== 'undefined' ? e.clientX : e.changedTouches[0].clientX
       let percentage =
-        ((e.clientX || e.changedTouches[0].clientX) -
-          Utils.getBoundingClientRectViewLeft(this.player.dom.playedBarWrap)) /
+        (clientX -
+          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.playedBarWrap, 'left')) /
         this.player.dom.playedBarWrap.clientWidth
       percentage = Math.max(percentage, 0)
       percentage = Math.min(percentage, 1)
@@ -173,11 +195,12 @@ export default class Controller {
     }
 
     const thumbUp = (e: any) => {
+      const clientX = typeof e.clientX !== 'undefined' ? e.clientX : e.changedTouches[0].clientX
       document.removeEventListener(Utils.nameMap.dragEnd, thumbUp)
       document.removeEventListener(Utils.nameMap.dragMove, thumbMove)
       let percentage =
-        ((e.clientX || e.changedTouches[0].clientX) -
-          Utils.getBoundingClientRectViewLeft(this.player.dom.playedBarWrap)) /
+        (clientX -
+          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.playedBarWrap, 'left')) /
         this.player.dom.playedBarWrap.clientWidth
       percentage = Math.max(percentage, 0)
       percentage = Math.min(percentage, 1)
@@ -195,21 +218,29 @@ export default class Controller {
     })
 
     this.player.dom.playedBarWrap.addEventListener(Utils.nameMap.dragMove, (e: any) => {
+      const barWidth = this.player.dom.playedBarWrap.offsetWidth
       if ((this.player.video as HTMLVideoElement).duration) {
         const px = Utils.cumulativeOffset(this.player.dom.playedBarWrap).left
-        const tx = (e.clientX || e.changedTouches[0].clientX) - px
-        if (tx < 0 || tx > this.player.dom.playedBarWrap.offsetWidth) {
+        const clientX = typeof e.clientX !== 'undefined' ? e.clientX : e.changedTouches[0].clientX
+        const tx = clientX - px
+        if (tx < 0 || tx > barWidth) {
           return
         }
 
-        const time =
-          (this.player.video as HTMLVideoElement).duration *
-          (tx / this.player.dom.playedBarWrap.offsetWidth)
+        const time = (this.player.video as HTMLVideoElement).duration * (tx / barWidth)
         if (Utils.isMobile) {
           this.thumbnails && this.thumbnails.show()
         }
         this.thumbnails && this.thumbnails.move(tx)
-        this.player.dom.playedBarTime.style.left = `${tx - (time >= 3600 ? 25 : 20)}px`
+        let BarTimeLeft: number = 0
+        if (tx - 23 < 0) {
+          BarTimeLeft = 23
+        } else if (tx + 23 > barWidth) {
+          BarTimeLeft = barWidth - 23
+        } else {
+          BarTimeLeft = tx
+        }
+        this.player.dom.playedBarTime.style.left = `${BarTimeLeft}px`
         this.player.dom.playedBarTime.innerText = Utils.secondToTime(time)
         Utils.classList.removeClass(this.player.dom.playedBarTime, 'hidden')
         this._handleThumbnail(tx, time)
@@ -273,104 +304,67 @@ export default class Controller {
 
   // 音量
   initVolumeButton(): void {
-    const vWidth = 35
+    const vHeight = 60
 
     const volumeMove = (event: any) => {
       const e = event || window.event
       const percentage =
-        ((e.clientX || e.changedTouches[0].clientX) -
-          Utils.getBoundingClientRectViewLeft(this.player.dom.volumeBarWrap) -
-          5.5) /
-        vWidth
+        1 -
+        ((e.clientY || e.changedTouches[0].clientY) -
+          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
+          vHeight
       this.player.volume(percentage)
     }
     const volumeUp = () => {
       document.removeEventListener(Utils.nameMap.dragEnd, volumeUp)
       document.removeEventListener(Utils.nameMap.dragMove, volumeMove)
-      Utils.classList.removeClass(this.player.dom.volumeButton, 'dplayer-volume-active')
     }
 
     this.player.dom.volumeBarWrapWrap.addEventListener('click', event => {
       const e: any = event || window.event
       const percentage =
-        ((e.clientX || e.changedTouches[0].clientX) -
-          Utils.getBoundingClientRectViewLeft(this.player.dom.volumeBarWrap) -
-          5.5) /
-        vWidth
+        1 -
+        ((e.clientY || e.changedTouches[0].clientY) -
+          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
+          vHeight
       this.player.volume(percentage)
     })
     this.player.dom.volumeBarWrapWrap.addEventListener(Utils.nameMap.dragStart, () => {
       document.addEventListener(Utils.nameMap.dragMove, volumeMove)
       document.addEventListener(Utils.nameMap.dragEnd, volumeUp)
+    })
+    this.player.dom.volumeButton.addEventListener('mouseenter', () => {
       Utils.classList.addClass(this.player.dom.volumeButton, 'dplayer-volume-active')
+    })
+    this.player.dom.volumeButton.addEventListener('mouseleave', () => {
+      Utils.classList.removeClass(this.player.dom.volumeButton, 'dplayer-volume-active')
     })
     this.player.dom.volumeButtonIcon.addEventListener('click', () => {
       if ((this.player.video as HTMLVideoElement).muted) {
         ;(this.player.video as HTMLVideoElement).muted = false
         this.player.switchVolumeIcon()
-        this.player.bar.set('volume', this.player.volume(), 'width')
+        this.player.bar.set('volume', this.player.volume(), 'height')
       } else {
         ;(this.player.video as HTMLVideoElement).muted = true
         this.player.dom.volumeIconFont.className = 'iconfont iconvolume-off'
-        this.player.bar.set('volume', 0, 'width')
+        this.player.bar.set('volume', 0, 'height')
       }
     })
   }
 
-  // initQualityButton() {
-  //     if (this.player.options.video.quality) {
-  //         this.player.dom.qualityList.addEventListener('click', (e) => {
-  //             if (e.target.classList.contains('dplayer-quality-item')) {
-  //                 this.player.switchQuality(e.target.dataset.index);
-  //             }
-  //         });
-  //     }
-  // }
+  maskhide(): void {
+    Utils.classList.removeClass(this.player.dom.doubleSpeedPopup, 'open')
+    Utils.classList.removeClass(this.player.dom.mask, 'dplayer-mask-show')
 
-  // initScreenshotButton() {
-  //     if (this.player.options.screenshot) {
-  //         this.player.dom.camareButton.addEventListener('click', () => {
-  //             const canvas = document.createElement('canvas');
-  //             canvas.width = this.player.video.videoWidth;
-  //             canvas.height = this.player.video.videoHeight;
-  //             canvas.getContext('2d').drawImage(this.player.video, 0, 0, canvas.width, canvas.height);
+    this.disableAutoHide = false
+  }
 
-  //             let dataURL;
-  //             canvas.toBlob((blob) => {
-  //                 dataURL = URL.createObjectURL(blob);
-  //                 const link = document.createElement('a');
-  //                 link.href = dataURL;
-  //                 link.download = 'DPlayer.png';
-  //                 link.style.display = 'none';
-  //                 document.body.appendChild(link);
-  //                 link.click();
-  //                 document.body.removeChild(link);
-  //                 URL.revokeObjectURL(dataURL);
-  //             });
+  maskShow(): void {
+    Utils.classList.addClass(this.player.dom.doubleSpeedPopup, 'open')
+    Utils.classList.addClass(this.player.dom.mask, 'dplayer-mask-show')
 
-  //             this.player.events.trigger('screenshot', dataURL);
-  //         });
-  //     }
-  // }
-
-  // initSubtitleButton() {
-  //     if (this.player.options.subtitle) {
-  //         this.player.events.on('subtitle_show', () => {
-  //             this.player.dom.subtitleButton.dataset.balloon = this.player.tran('Hide subtitle');
-  //             this.player.dom.subtitleButtonInner.style.opacity = '';
-  //             this.player.user.set('subtitle', 1);
-  //         });
-  //         this.player.events.on('subtitle_hide', () => {
-  //             this.player.dom.subtitleButton.dataset.balloon = this.player.tran('Show subtitle');
-  //             this.player.dom.subtitleButtonInner.style.opacity = '0.4';
-  //             this.player.user.set('subtitle', 0);
-  //         });
-
-  //         this.player.dom.subtitleButton.addEventListener('click', () => {
-  //             this.player.subtitle.toggle();
-  //         });
-  //     }
-  // }
+    this.disableAutoHide = true
+  }
 
   setAutoHide(): void {
     this.show()

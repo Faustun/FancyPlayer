@@ -34,6 +34,8 @@ export default class Dom {
   playRetreat?: HTMLElement
   doubleSpeed?: HTMLElement
   doubleSpeedPopup?: HTMLElement
+  mask?: HTMLElement
+  controllerLeft?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -42,7 +44,7 @@ export default class Dom {
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void {
     const { video, preload, screenshot, logo, theme } = options
-    this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
+    this.mask = this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
     this.videoWrap = this.createDom({ ele: element, label: 'div', className: 'dplayer-video-wrap' })
     // 视频
     if (video) {
@@ -101,14 +103,14 @@ export default class Dom {
       className: 'dplayer-controller'
     })
 
-    const controllerLeft = this.createDom({
+    this.controllerLeft = this.createDom({
       ele: this.controller,
       label: 'div',
       className: 'dplayer-icons dplayer-icons-left'
     })
 
     this.playRetreat = this.createDom({
-      ele: controllerLeft,
+      ele: this.controllerLeft,
       label: 'button',
       className: 'dplayer-icon dplayer-retreat'
     })
@@ -119,7 +121,7 @@ export default class Dom {
     })
 
     this.playButton = this.createDom({
-      ele: controllerLeft,
+      ele: this.controllerLeft,
       label: 'button',
       className: 'dplayer-icon dplayer-play-icon'
     })
@@ -130,7 +132,7 @@ export default class Dom {
     })
 
     this.playFast = this.createDom({
-      ele: controllerLeft,
+      ele: this.controllerLeft,
       label: 'button',
       className: 'dplayer-icon dplayer-fast'
     })
@@ -177,13 +179,11 @@ export default class Dom {
       label: 'span',
       className: 'dplayer-double-speed'
     })
-    const doubleSpeedStr = `<div class="dplayer-popup-speed-item" data-speed="0.5"><span class="dplayer-label">0.5</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="0.75"><span class="dplayer-label">0.75</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="1"><span class="dplayer-label">倍速</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="1.25"><span class="dplayer-label">1.25</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="1.5"><span class="dplayer-label">1.5</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="1.75"><span class="dplayer-label">1.75</span></div>
-    <div class="dplayer-popup-speed-item" data-speed="2"><span class="dplayer-label">2</span></div>
+    const doubleSpeedStr = `<div class="dplayer-popup-speed-item" data-speed="0.5X">0.5X</div>
+    <div class="dplayer-popup-speed-item" data-speed="1X">1X</div>
+    <div class="dplayer-popup-speed-item" data-speed="1.25X">1.25X</div>
+    <div class="dplayer-popup-speed-item" data-speed="1.5X">1.5X</div>
+    <div class="dplayer-popup-speed-item" data-speed="2X">2X</div>
     `
     this.doubleSpeedPopup = this.createDom({
       ele: doubleSpeed,

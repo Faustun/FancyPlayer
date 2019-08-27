@@ -293,7 +293,7 @@ export default class Player implements PlayerInterface {
       }
       ;[].slice.call(nodeSmall, 0).forEach((item: HTMLElement) => {
         const widthItem = parseFloat(item.style.left!) / 100
-        if (widthItem < this.bar.get('played')) {
+        if (widthItem < this.bar.get('played', 'widht')) {
           item.style.backgroundColor = '#fff'
         } else {
           item.style.backgroundColor = this.options.theme!
@@ -315,6 +315,9 @@ export default class Player implements PlayerInterface {
     //     this.subtitle.hide();
     //   }
     // }
+  }
+  speed(rate: string): void {
+    this.video.playbackRate = parseFloat(rate)
   }
 
   on(name: string, callback: PlayerOnCallBack) {
@@ -394,7 +397,7 @@ export default class Player implements PlayerInterface {
     if (!isNaN(percentage!)) {
       percentage = Math.max(percentage!, 0)
       percentage = Math.min(percentage, 1)
-      this.bar.set('volume', percentage, 'width')
+      this.bar.set('volume', percentage, 'height')
       const formatPercentage = `${(percentage * 100).toFixed(0)}%`
       this.dom.volumeBarWrapWrap.dataset.balloon = formatPercentage
       if (!nostorage) {
@@ -417,7 +420,6 @@ export default class Player implements PlayerInterface {
     return percentage!
   }
   switchVolumeIcon(): void {
-    console.log(this.volume())
     if (this.volume() >= 0.95) {
       this.dom.volumeIconFont.className = 'iconfont iconvolume-up'
     } else if (this.volume() > 0) {
