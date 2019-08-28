@@ -293,7 +293,7 @@ export default class Player implements PlayerInterface {
       }
       ;[].slice.call(nodeSmall, 0).forEach((item: HTMLElement) => {
         const widthItem = parseFloat(item.style.left!) / 100
-        if (widthItem < this.bar.get('played', 'widht')) {
+        if (widthItem < this.bar.get('played', 'width')) {
           item.style.backgroundColor = '#fff'
         } else {
           item.style.backgroundColor = this.options.theme!

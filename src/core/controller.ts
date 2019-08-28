@@ -40,9 +40,7 @@ export default class Controller {
     this.initFullButton()
     this.initDoubleSpeed()
     this.initHighlights()
-    if (!Utils.isMobile) {
-      this.initVolumeButton()
-    }
+    this.initVolumeButton()
   }
 
   // 播放按钮
@@ -304,41 +302,43 @@ export default class Controller {
 
   // 音量
   initVolumeButton(): void {
-    const vHeight = 60
+    if (!Utils.isMobile) {
+      const vHeight = 60
 
-    const volumeMove = (event: any) => {
-      const e = event || window.event
-      const percentage =
-        1 -
-        ((e.clientY || e.changedTouches[0].clientY) -
-          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
-          vHeight
-      this.player.volume(percentage)
-    }
-    const volumeUp = () => {
-      document.removeEventListener(Utils.nameMap.dragEnd, volumeUp)
-      document.removeEventListener(Utils.nameMap.dragMove, volumeMove)
-    }
+      const volumeMove = (event: any) => {
+        const e = event || window.event
+        const percentage =
+          1 -
+          ((e.clientY || e.changedTouches[0].clientY) -
+            Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
+            vHeight
+        this.player.volume(percentage)
+      }
+      const volumeUp = () => {
+        document.removeEventListener(Utils.nameMap.dragEnd, volumeUp)
+        document.removeEventListener(Utils.nameMap.dragMove, volumeMove)
+      }
 
-    this.player.dom.volumeBarWrapWrap.addEventListener('click', event => {
-      const e: any = event || window.event
-      const percentage =
-        1 -
-        ((e.clientY || e.changedTouches[0].clientY) -
-          Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
-          vHeight
-      this.player.volume(percentage)
-    })
-    this.player.dom.volumeBarWrapWrap.addEventListener(Utils.nameMap.dragStart, () => {
-      document.addEventListener(Utils.nameMap.dragMove, volumeMove)
-      document.addEventListener(Utils.nameMap.dragEnd, volumeUp)
-    })
-    this.player.dom.volumeButton.addEventListener('mouseenter', () => {
-      Utils.classList.addClass(this.player.dom.volumeButton, 'dplayer-volume-active')
-    })
-    this.player.dom.volumeButton.addEventListener('mouseleave', () => {
-      Utils.classList.removeClass(this.player.dom.volumeButton, 'dplayer-volume-active')
-    })
+      this.player.dom.volumeBarWrapWrap.addEventListener('click', event => {
+        const e: any = event || window.event
+        const percentage =
+          1 -
+          ((e.clientY || e.changedTouches[0].clientY) -
+            Utils.getBoundingClientRectViewLeftOrTop(this.player.dom.volumeBarWrap, 'top')) /
+            vHeight
+        this.player.volume(percentage)
+      })
+      this.player.dom.volumeBarWrapWrap.addEventListener(Utils.nameMap.dragStart, () => {
+        document.addEventListener(Utils.nameMap.dragMove, volumeMove)
+        document.addEventListener(Utils.nameMap.dragEnd, volumeUp)
+      })
+      this.player.dom.volumeButton.addEventListener('mouseenter', () => {
+        Utils.classList.addClass(this.player.dom.volumeButton, 'dplayer-volume-active')
+      })
+      this.player.dom.volumeButton.addEventListener('mouseleave', () => {
+        Utils.classList.removeClass(this.player.dom.volumeButton, 'dplayer-volume-active')
+      })
+    }
     this.player.dom.volumeButtonIcon.addEventListener('click', () => {
       if ((this.player.video as HTMLVideoElement).muted) {
         ;(this.player.video as HTMLVideoElement).muted = false

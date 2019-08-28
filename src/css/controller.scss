@@ -38,7 +38,6 @@ $theme: #4588bf;
     bottom: 55px;
     width: 100%;
     height: $barHeight;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &:hover {
       .dplayer-bar .dplayer-played .dplayer-thumb {
@@ -48,7 +47,7 @@ $theme: #4588bf;
 
     .dplayer-highlight {
       &.node-large {
-        z-index: 2;
+        z-index: 1;
         position: absolute;
         top: 1px;
         width: 10px;
@@ -62,7 +61,7 @@ $theme: #4588bf;
       }
 
       &.node-small {
-        z-index: 2;
+        z-index: 1;
         position: absolute;
         top: 5px;
         width: 2px;

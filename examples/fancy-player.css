@@ -159,6 +159,7 @@
 }
 .dplayer * {
   box-sizing: content-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .dplayer svg {
   width: 100%;
@@ -274,10 +275,6 @@
 .dplayer.dplayer-mobile .dplayer-controller .dplayer-icons.dplayer-icons-left {
   left: 20px;
   transform: translateX(0);
-}
-.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-volume,
-.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-camera-icon {
-  display: none;
 }
 .dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-full .dplayer-full-in-icon {
   position: static;
@@ -474,13 +471,12 @@
   bottom: 55px;
   width: 100%;
   height: 6px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .dplayer-controller .dplayer-bar-wrap:hover .dplayer-bar .dplayer-played .dplayer-thumb {
   transform: scale(1);
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-large {
-  z-index: 2;
+  z-index: 1;
   position: absolute;
   top: 1px;
   width: 10px;
@@ -493,7 +489,7 @@
   transition: all 0.2s ease-in-out;
 }
 .dplayer-controller .dplayer-bar-wrap .dplayer-highlight.node-small {
-  z-index: 2;
+  z-index: 1;
   position: absolute;
   top: 5px;
   width: 2px;
@@ -926,7 +922,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 2;
   display: none;
 }
 .dplayer-mask.dplayer-mask-show {
