@@ -5,7 +5,7 @@ $theme: #4588bf;
 
 .dplayer-controller-mask {
   background-color: $backColor;
-  height: 66px;
+  height: 60px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -17,7 +17,7 @@ $theme: #4588bf;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 66px;
+  height: 60px;
   user-select: none;
   transition: all 0.3s ease;
 
@@ -38,6 +38,7 @@ $theme: #4588bf;
     bottom: 55px;
     width: 100%;
     height: $barHeight;
+    transition: all 0.3s ease;
 
     &:hover {
       .dplayer-bar .dplayer-played .dplayer-thumb {

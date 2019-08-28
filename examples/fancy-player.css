@@ -442,7 +442,7 @@
 
 .dplayer-controller-mask {
   background-color: rgba(98, 102, 105, 0.5);
-  height: 66px;
+  height: 60px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -454,7 +454,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 66px;
+  height: 60px;
   user-select: none;
   transition: all 0.3s ease;
 }

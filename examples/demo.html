@@ -15,7 +15,7 @@
         let div = document.createElement('div')
         document.body.appendChild(div)
 
-        new player({
+        const dp = new player({
             container: div,
             video: {
                 url: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4',
@@ -69,6 +69,12 @@
                     thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/601/w/120/h/90'
                 }
             ]
+        })
+        document.body.addEventListener('dblclick', () => {
+            dp.switchVideo({
+                url: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4',
+                pic: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/0'
+            })
         })
     </script>
 </body>

@@ -1,192 +1,202 @@
 .dplayer {
-    position: relative;
-    overflow: hidden;
-    user-select: none;
-    line-height: 1;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  line-height: 1;
 
-    * {
-        box-sizing: content-box;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  * {
+    box-sizing: content-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+
+    path,
+    circle {
+      fill: #fff;
+    }
+  }
+
+  &:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    transform: translate(0, 0);
+
+    .dplayer-danmaku {
+      .dplayer-danmaku-top,
+      .dplayer-danmaku-bottom {
+        &.dplayer-danmaku-move {
+          animation: danmaku-center 6s linear;
+          animation-play-state: inherit;
+        }
+      }
+
+      .dplayer-danmaku-right {
+        &.dplayer-danmaku-move {
+          animation: danmaku 8s linear;
+          animation-play-state: inherit;
+        }
+      }
+    }
+  }
+
+  &.dplayer-no-danmaku {
+    .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box {
+      .dplayer-setting-showdan,
+      .dplayer-setting-danmaku,
+      .dplayer-setting-danunlimit {
+        display: none;
+      }
     }
 
-    svg {
-        width: 100%;
-        height: 100%;
-        
-        path,
-        circle {
-            fill: #fff;
-        }
+    .dplayer-controller .dplayer-icons .dplayer-comment {
+      display: none;
     }
 
-    &:-webkit-full-screen {
-        width: 100%;
-        height: 100%;
-        background: #000;
-        position: fixed;
-        z-index: 100000;
-        left: 0;
-        top: 0;
-        margin: 0;
-        padding: 0;
-        transform: translate(0, 0);
+    .dplayer-danmaku {
+      display: none;
+    }
+  }
 
-        .dplayer-danmaku {
-            .dplayer-danmaku-top,
-            .dplayer-danmaku-bottom {
-                &.dplayer-danmaku-move {
-                    animation: danmaku-center 6s linear;
-                    animation-play-state: inherit;
-                }
-            }
-
-            .dplayer-danmaku-right {
-                &.dplayer-danmaku-move {
-                    animation: danmaku 8s linear;
-                    animation-play-state: inherit;
-                }
-            }
-        }
+  &.dplayer-live {
+    .dplayer-time {
+      display: none;
+    }
+    .dplayer-bar-wrap {
+      display: none;
+    }
+    .dplayer-setting-speed {
+      display: none;
+    }
+    .dplayer-setting-loop {
+      display: none;
     }
 
     &.dplayer-no-danmaku {
-        .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box {
-            .dplayer-setting-showdan,
-            .dplayer-setting-danmaku,
-            .dplayer-setting-danunlimit {
-                display: none;
-            }
-        }
+      .dplayer-setting {
+        display: none;
+      }
+    }
+  }
 
-        .dplayer-controller .dplayer-icons .dplayer-comment {
-            display: none;
-        }
+  &.dplayer-arrow {
+    .dplayer-danmaku {
+      font-size: 18px;
+    }
+    .dplayer-icon {
+      margin: 0 -3px;
+    }
+  }
 
-        .dplayer-danmaku {
-            display: none;
-        }
+  &.dplayer-playing {
+    .dplayer-danmaku .dplayer-danmaku-move {
+      animation-play-state: running;
     }
 
-    &.dplayer-live {
-        .dplayer-time {
-            display: none;
-        }
-        .dplayer-bar-wrap {
-            display: none;
-        }
-        .dplayer-setting-speed {
-            display: none;
-        }
-        .dplayer-setting-loop {
-            display: none;
-        }
+    @media (min-width: 900px) {
+      .dplayer-controller-mask {
+        opacity: 0;
+      }
+      .dplayer-controller {
+        opacity: 0;
+      }
 
-        &.dplayer-no-danmaku {
-            .dplayer-setting {
-                display: none;
-            }
-        }
-    }
-
-    &.dplayer-arrow {
-        .dplayer-danmaku {
-            font-size: 18px
-        }
-        .dplayer-icon {
-            margin: 0 -3px;
-        }
-    }
-
-    &.dplayer-playing {
-
-        .dplayer-danmaku .dplayer-danmaku-move {
-            animation-play-state: running;
-        }
-
-        @media (min-width: 900px) {
-            .dplayer-controller-mask {
-                opacity: 0;
-            }
-            .dplayer-controller {
-                opacity: 0;
-            }
-
-            &:hover {
-                .dplayer-controller-mask {
-                    opacity: 1;
-                }
-                .dplayer-controller {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-
-    &.dplayer-loading {
-        .dplayer-bezel .diplayer-loading-icon {
-            display: block;
-        }
-    }
-
-    &.dplayer-loading,
-    &.dplayer-paused {
-        .dplayer-danmaku,
-        .dplayer-danmaku-move {
-            animation-play-state: paused;
-        }
-    }
-
-    &.dplayer-hide-controller {
-        cursor: none;
-
+      &:hover {
         .dplayer-controller-mask {
-            opacity: 0;
-            transform: translateY(110%);
+          opacity: 1;
         }
         .dplayer-controller {
-            opacity: 0;
-            transform: translateY(110%);
+          opacity: 1;
         }
+      }
     }
-    &.dplayer-show-controller {
-        .dplayer-controller-mask {
-            opacity: 1;
-        }
-        .dplayer-controller {
-            opacity: 1;
-        }
-    }
-    &.dplayer-fulled {
-        position: fixed;
-        z-index: 100000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-    }
-    &.dplayer-mobile {
-        .dplayer-controller .dplayer-icons {
-            &.dplayer-icons-left {
-                left: 20px;
-                transform: translateX(0);
-            }
-            .dplayer-full .dplayer-full-in-icon {
-                position: static;
-                display: inline-block;
-            }
-        }
+  }
 
-        .dplayer-bar-time {
-            display: none;
-        }
+  &.dplayer-loading {
+    .dplayer-bezel .diplayer-loading-icon {
+      display: block;
     }
+  }
+
+  &.dplayer-loading,
+  &.dplayer-paused {
+    .dplayer-danmaku,
+    .dplayer-danmaku-move {
+      animation-play-state: paused;
+    }
+  }
+
+  &.dplayer-hide-controller {
+    cursor: none;
+
+    .dplayer-controller-mask {
+      opacity: 0;
+      transform: translateY(110%);
+    }
+    .dplayer-controller {
+      opacity: 0;
+      transform: translateY(110%);
+    }
+  }
+  &.dplayer-show-controller {
+    .dplayer-controller-mask {
+      opacity: 1;
+    }
+    .dplayer-controller {
+      opacity: 1;
+    }
+  }
+  &.dplayer-fulled {
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.dplayer-mobile {
+    .dplayer-controller .dplayer-icons {
+      &.dplayer-icons-left {
+        left: 20px;
+        transform: translateX(0);
+      }
+      .dplayer-full .dplayer-full-in-icon {
+        position: static;
+        display: inline-block;
+      }
+    }
+
+    .dplayer-bar-time {
+      display: none;
+    }
+  }
+  &.dplayer-no-highlight {
+    .dplayer-controller-mask,
+    .dplayer-controller {
+      height: 38px;
+    }
+    .dplayer-controller {
+      .dplayer-bar-wrap {
+        bottom: 33px;
+      }
+    }
+  }
 }
 
 // To hide scroll bar, apply this class to <body>
 .dplayer-web-fullscreen-fix {
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
 }

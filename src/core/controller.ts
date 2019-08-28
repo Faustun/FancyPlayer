@@ -109,8 +109,17 @@ export default class Controller {
       const highlightOptions = this.player.options.highlight
       if (duration !== 1 && duration !== 0 && duration !== Infinity) {
         if (highlightOptions) {
+          if (highlightOptions.length) {
+            Utils.classList.removeClass(this.player.container, 'dplayer-no-highlight')
+          } else {
+            Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
+          }
           const highlights = document.querySelectorAll('.dplayer-highlight')
-          ;[].slice.call(highlights, 0).forEach((item: Element) => {
+          const highlightLabels = document.querySelectorAll('.dplayer-highlight-label')
+          ;[].slice.call(highlights, 0).forEach((item: HTMLElement) => {
+            this.player.dom.playedBarWrap.removeChild(item)
+          })
+          ;[].slice.call(highlightLabels, 0).forEach((item: HTMLElement) => {
             this.player.dom.playedBarWrap.removeChild(item)
           })
           let parentHighlights: InterfaceHighlights[] = []
@@ -150,6 +159,8 @@ export default class Controller {
             }
             this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
           }
+        } else {
+          Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
         }
       }
     })
