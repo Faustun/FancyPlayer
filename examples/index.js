@@ -1,9 +1,9 @@
-import Player from '../src/index'
+import Player from '../src/player'
 
 let div = document.createElement('div')
 document.body.appendChild(div)
 
-Player({
+new Player({
     container: div,
     video: {
         url: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4',
