@@ -3,7 +3,7 @@ import { PlayerInterfaceConfig } from '../type/options'
 export default (options: PlayerInterfaceConfig): PlayerInterfaceConfig => {
   // default options
   const defaultOption: PlayerInterfaceConfig = {
-    container: options.container || document.getElementsByClassName('dplayer')[0],
+    container: options.container || document.getElementsByClassName('fancy-player')[0],
     live: false,
     autoplay: false,
     theme: '#4588bf',
