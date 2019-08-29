@@ -52,7 +52,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, '..', 'examples'),
         clientLogLevel: 'none',
         port: 9000,
-        host: '192.168.0.127',
+        // host: '192.168.0.127',
         quiet: false,
         open: true,
         historyApiFallback: {
