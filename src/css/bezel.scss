@@ -12,17 +12,24 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -26px 0 0 -26px;
-    height: 52px;
-    line-height: 28px;
-    width: 52px;
-    padding: 12px;
+    margin: -30px 0 0 -50px;
+    height: 60px;
+    width: 100px;
     text-align: center;
     box-sizing: border-box;
+    border: 3px solid #fff;
     background: rgba(0, 0, 0, .5);
-    border-radius: 50%;
+    border-radius: 10px;
     opacity: 0;
     pointer-events: none;
+    transition: all 0.3s ease;
+    .iconfont {
+      font-size: 50px;
+    }
+    
+    &.dplayer-bezel-pause {
+      opacity: 1;
+    }
 
     &.dplayer-bezel-transition {
       animation: bezel-hide .5s linear;

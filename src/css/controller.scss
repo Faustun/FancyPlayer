@@ -202,7 +202,6 @@ $theme: #4588bf;
     bottom: 0;
 
     &.dplayer-icons-left {
-      z-index: 1;
       left: 50%;
       transform: translateX(-50%);
 
@@ -212,7 +211,6 @@ $theme: #4588bf;
     }
 
     &.dplayer-icons-right {
-      z-index: 1;
       right: 20px;
 
       .dplayer-icon {
@@ -327,6 +325,7 @@ $theme: #4588bf;
       display: inline-block;
       cursor: pointer;
       height: 100%;
+      z-index: 1;
 
       &.dplayer-volume-active {
         .dplayer-volume-bar-wrap {

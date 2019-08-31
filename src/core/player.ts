@@ -14,7 +14,6 @@ import Bar from './bar'
 import FullScreen from './fullscreen'
 import Controller from './controller'
 import Timer from './timer'
-import Bezel from './bezel'
 import Hotkey from './hotkey'
 
 const instances: PlayerInterface[] = []
@@ -34,7 +33,6 @@ export default class Player implements PlayerInterface {
   fullScreen: any
   controller: any
   paused?: boolean
-  bezel: any
   timer: any
   danmaku: any
   noticeTime: any
@@ -53,7 +51,7 @@ export default class Player implements PlayerInterface {
     this.user = new User(this)
 
     this.container = this.options.container
-    Utils.classList.addClass(this.container, 'dplayer')
+    Utils.classList.addClasses(this.container, 'dplayer dplayer-hide-controller')
     if (!this.options.danmaku) {
       Utils.classList.addClass(this.container, 'dplayer-no-danmaku')
     }
@@ -73,7 +71,6 @@ export default class Player implements PlayerInterface {
     this.video = this.dom.video as HTMLVideoElement
 
     this.bar = new Bar(this.dom)
-    this.bezel = new Bezel(this.dom)
     this.hotkey = new Hotkey(this)
 
     this.fullScreen = new FullScreen(this)
@@ -251,9 +248,7 @@ export default class Player implements PlayerInterface {
 
   play(): void {
     this.paused = false
-    if (this.video.paused) {
-      this.bezel.switch('iconfont iconplay')
-    }
+    Utils.classList.removeClass(this.dom.bezelIconBox, 'dplayer-bezel-pause')
 
     this.dom.playButtonIco.className = 'iconfont iconpause'
 
@@ -282,10 +277,7 @@ export default class Player implements PlayerInterface {
   pause(): void {
     this.paused = true
     Utils.classList.removeClass(this.container, 'dplayer-loading')
-
-    if (!this.video.paused) {
-      this.bezel.switch('iconfont iconpause')
-    }
+    Utils.classList.addClass(this.dom.bezelIconBox, 'dplayer-bezel-pause')
 
     this.dom.playButtonIco.className = 'iconfont iconplay'
     this.video.pause()

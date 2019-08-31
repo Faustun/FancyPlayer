@@ -77,7 +77,7 @@ export default class Dom {
     this.bezelIconBox = this.createDom({
       ele: bezelWrap,
       label: 'span',
-      className: 'dplayer-bezel-icon'
+      className: 'dplayer-bezel-icon dplayer-bezel-pause'
     })
     const LoadHtmlStr = `<div class="spinner1"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>`
     this.loadingIcon = this.createDom({
@@ -89,7 +89,7 @@ export default class Dom {
     this.bezelIcon = this.createDom({
       ele: this.bezelIconBox,
       label: 'span',
-      className: 'iconfont'
+      className: 'iconfont iconplay'
     })
 
     this.controllerMask = this.createDom({

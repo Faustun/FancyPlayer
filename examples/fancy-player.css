@@ -299,19 +299,6 @@
   padding: 0;
 }
 
-[data-balloon]:before {
-  display: none;
-}
-
-[data-balloon]:after {
-  padding: 0.3em 0.7em;
-  background: rgba(17, 17, 17, 0.7);
-}
-
-[data-balloon][data-balloon-pos=up]:after {
-  margin-bottom: 0;
-}
-
 .dplayer-bezel {
   position: absolute;
   left: 0;
@@ -326,17 +313,23 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -26px 0 0 -26px;
-  height: 52px;
-  line-height: 28px;
-  width: 52px;
-  padding: 12px;
+  margin: -30px 0 0 -50px;
+  height: 60px;
+  width: 100px;
   text-align: center;
   box-sizing: border-box;
+  border: 3px solid #fff;
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
+  border-radius: 10px;
   opacity: 0;
   pointer-events: none;
+  transition: all 0.3s ease;
+}
+.dplayer-bezel .dplayer-bezel-icon .iconfont {
+  font-size: 50px;
+}
+.dplayer-bezel .dplayer-bezel-icon.dplayer-bezel-pause {
+  opacity: 1;
 }
 .dplayer-bezel .dplayer-bezel-icon.dplayer-bezel-transition {
   animation: bezel-hide 0.5s linear;
@@ -619,7 +612,6 @@
   bottom: 0;
 }
 .dplayer-controller .dplayer-icons.dplayer-icons-left {
-  z-index: 1;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -627,7 +619,6 @@
   padding: 7px;
 }
 .dplayer-controller .dplayer-icons.dplayer-icons-right {
-  z-index: 1;
   right: 20px;
 }
 .dplayer-controller .dplayer-icons.dplayer-icons-right .dplayer-icon {
@@ -725,6 +716,7 @@
   display: inline-block;
   cursor: pointer;
   height: 100%;
+  z-index: 1;
 }
 .dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap {
   transform: scale(1);
@@ -784,64 +776,6 @@
   top: -30px;
   z-index: 1;
   display: none;
-}
-
-.dplayer-danmaku {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  font-size: 22px;
-  color: #fff;
-}
-.dplayer-danmaku .dplayer-danmaku-item {
-  display: inline-block;
-  pointer-events: none;
-  user-select: none;
-  cursor: default;
-  white-space: nowrap;
-  text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
-}
-.dplayer-danmaku .dplayer-danmaku-item--demo {
-  position: absolute;
-  visibility: hidden;
-}
-.dplayer-danmaku .dplayer-danmaku-right {
-  position: absolute;
-  right: 0;
-  transform: translateX(100%);
-}
-.dplayer-danmaku .dplayer-danmaku-right.dplayer-danmaku-move {
-  will-change: transform;
-  animation: danmaku 5s linear;
-  animation-play-state: paused;
-}
-@keyframes danmaku {
-  from {
-    transform: translateX(100%);
-  }
-}
-.dplayer-danmaku .dplayer-danmaku-top,
-.dplayer-danmaku .dplayer-danmaku-bottom {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  visibility: hidden;
-}
-.dplayer-danmaku .dplayer-danmaku-top.dplayer-danmaku-move,
-.dplayer-danmaku .dplayer-danmaku-bottom.dplayer-danmaku-move {
-  will-change: visibility;
-  animation: danmaku-center 4s linear;
-  animation-play-state: paused;
-}
-@keyframes danmaku-center {
-  from {
-    visibility: visible;
-  }
-  to {
-    visibility: visible;
-  }
 }
 
 .dplayer-logo {
@@ -912,20 +846,6 @@
   pointer-events: none;
 }
 
-.dplayer-subtitle {
-  position: absolute;
-  bottom: 40px;
-  width: 90%;
-  left: 5%;
-  text-align: center;
-  color: #fff;
-  text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
-  font-size: 20px;
-}
-.dplayer-subtitle.dplayer-subtitle-hide {
-  display: none;
-}
-
 .dplayer-mask {
   position: absolute;
   top: 0;
@@ -956,43 +876,6 @@
 }
 .dplayer-video-wrap .dplayer-video-prepare {
   display: none;
-}
-
-.dplayer-info-panel {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 400px;
-  background: rgba(28, 28, 28, 0.8);
-  padding: 10px;
-  color: #fff;
-  font-size: 12px;
-  border-radius: 2px;
-}
-.dplayer-info-panel-hide {
-  display: none;
-}
-.dplayer-info-panel .dplayer-info-panel-close {
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-.dplayer-info-panel .dplayer-info-panel-item > span {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 15px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.dplayer-info-panel .dplayer-info-panel-item-title {
-  width: 100px;
-  text-align: right;
-  margin-right: 10px;
-}
-.dplayer-info-panel .dplayer-info-panel-item-data {
-  width: 260px;
 }
 
 @font-face {

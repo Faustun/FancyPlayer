@@ -20,6 +20,7 @@ export default class Controller {
     })
     if (!Utils.isMobile) {
       this.player.container.addEventListener('mousemove', () => {
+        this.show()
         this.setAutoHide()
       })
       this.player.container.addEventListener('click', () => {
@@ -57,9 +58,9 @@ export default class Controller {
         this.player.toggle()
       })
     } else {
-      this.player.dom.videoWrap.addEventListener('click', () => {
-        this.toggle()
-      })
+      // this.player.dom.videoWrap.addEventListener('click', () => {
+      //   this.toggle()
+      // })
       this.player.dom.controllerMask.addEventListener('click', () => {
         this.toggle()
       })
@@ -378,14 +379,10 @@ export default class Controller {
   }
 
   setAutoHide(): void {
-    this.show()
+    // this.show()
     clearTimeout(this.autoHideTimer)
     this.autoHideTimer = window.setTimeout(() => {
-      if (
-        (this.player.video as HTMLVideoElement).played.length &&
-        !this.player.paused &&
-        !this.disableAutoHide
-      ) {
+      if (!this.disableAutoHide) {
         this.hide()
       }
     }, 3000)
@@ -397,8 +394,6 @@ export default class Controller {
 
   hide(): void {
     Utils.classList.addClass(this.player.container, 'dplayer-hide-controller')
-    // this.player.setting.hide();
-    // this.player.comment && this.player.comment.hide();
   }
 
   isShow(): boolean {
