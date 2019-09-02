@@ -9,11 +9,14 @@ export default class Controller {
   autoHideTimer: number
   thumbnails?: Thumbnails
   disableAutoHide: any
+  status: boolean
+  onOff: boolean
 
   constructor(player: PlayerInterface) {
     this.player = player
-
     this.autoHideTimer = 0
+    this.status = false
+    this.onOff = true
 
     this.player.dom.mask.addEventListener('click', () => {
       this.maskhide()
@@ -58,9 +61,33 @@ export default class Controller {
         this.player.toggle()
       })
     } else {
-      // this.player.dom.videoWrap.addEventListener('click', () => {
-      //   this.toggle()
-      // })
+      this.player.dom.videoWrap.addEventListener('touchstart', () => {
+        if (this.status) {
+          this.status = false
+          setTimeout(() => {
+            if (!this.status && this.onOff) {
+              this.toggle()
+            } else if (this.status) {
+              this.player.toggle()
+              this.onOff = false
+            } else if (!this.onOff) {
+              this.onOff = true
+            }
+          }, 500)
+        } else if (!this.status) {
+          this.status = true
+          setTimeout(() => {
+            if (this.status && this.onOff) {
+              this.toggle()
+            } else if (!this.status) {
+              this.player.toggle()
+              this.onOff = false
+            } else if (!this.onOff) {
+              this.onOff = true
+            }
+          }, 500)
+        }
+      })
       this.player.dom.controllerMask.addEventListener('click', () => {
         this.toggle()
       })
