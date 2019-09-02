@@ -154,7 +154,10 @@ class Utils {
   static isIE = navigator.userAgent.indexOf('Trident') >= 0
   static isChrome = navigator.userAgent.indexOf('Chrome') >= 0
   static isFirefox = navigator.userAgent.indexOf('Firefox') >= 0
-  static isMobile = navigator.userAgent.indexOf('Mobile') >= 0
+  static isMobile =
+    navigator.userAgent.indexOf('Android') >= 0 ||
+    navigator.userAgent.indexOf('Adr') >= 0 ||
+    !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 
   static storage = {
     set(key: string, value: any): void {
