@@ -61,7 +61,7 @@ export default class Controller {
         this.player.toggle()
       })
     } else {
-      this.player.dom.videoWrap.addEventListener('touchstart', () => {
+      this.player.dom.videoWrap.addEventListener('click', () => {
         if (this.status) {
           this.status = false
           setTimeout(() => {
@@ -73,7 +73,7 @@ export default class Controller {
             } else if (!this.onOff) {
               this.onOff = true
             }
-          }, 500)
+          }, 300)
         } else if (!this.status) {
           this.status = true
           setTimeout(() => {
@@ -85,7 +85,7 @@ export default class Controller {
             } else if (!this.onOff) {
               this.onOff = true
             }
-          }, 500)
+          }, 300)
         }
       })
       this.player.dom.controllerMask.addEventListener('click', () => {
