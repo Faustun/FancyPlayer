@@ -62,6 +62,7 @@ export default class Controller {
       })
     } else {
       this.player.dom.videoWrap.addEventListener('click', () => {
+        this.setAutoHide()
         if (this.status) {
           this.status = false
           setTimeout(() => {
@@ -420,7 +421,9 @@ export default class Controller {
   }
 
   hide(): void {
-    Utils.classList.addClass(this.player.container, 'dplayer-hide-controller')
+    if (!Utils.classList.hasClass(this.player.container, 'dplayer-hide-controller')) {
+      Utils.classList.addClass(this.player.container, 'dplayer-hide-controller')
+    }
   }
 
   isShow(): boolean {
