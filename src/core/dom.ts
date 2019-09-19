@@ -36,6 +36,7 @@ export default class Dom {
   doubleSpeedPopup?: HTMLElement
   mask?: HTMLElement
   controllerLeft?: HTMLElement
+  danmaku?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -43,7 +44,7 @@ export default class Dom {
   }
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void {
-    const { video, preload, screenshot, logo, theme } = options
+    const { video, preload, screenshot, logo, theme, danmaku } = options
     this.mask = this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
     this.videoWrap = this.createDom({ ele: element, label: 'div', className: 'dplayer-video-wrap' })
     // 视频
@@ -68,6 +69,18 @@ export default class Dom {
         className: 'dplayer-logo'
       })
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
+    }
+    if (danmaku) {
+      this.danmaku = this.createDom({
+        ele: this.videoWrap,
+        label: 'div',
+        className: 'dplayer-danmaku'
+      })
+      this.createDom({
+        ele: this.danmaku,
+        label: 'div',
+        className: 'dplayer-danmaku-item dplayer-danmaku-item--demo'
+      })
     }
     const bezelWrap = this.createDom({
       ele: this.videoWrap,

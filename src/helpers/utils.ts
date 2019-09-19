@@ -266,6 +266,22 @@ class Utils {
       left: left
     }
   }
+  static number2Color(num: number) {
+    return '#' + ('00000' + num.toString(16)).slice(-6)
+  }
+
+  static number2Type(num: number) {
+    switch (num) {
+      case 0:
+        return 'right'
+      case 1:
+        return 'top'
+      case 2:
+        return 'bottom'
+      default:
+        return 'right'
+    }
+  }
 }
 
 export default Utils

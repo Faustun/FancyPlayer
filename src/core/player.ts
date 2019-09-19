@@ -15,6 +15,7 @@ import FullScreen from './fullscreen'
 import Controller from './controller'
 import Timer from './timer'
 import Hotkey from './hotkey'
+import Danmaku from './danmaku'
 
 const instances: PlayerInterface[] = []
 
@@ -75,6 +76,36 @@ export default class Player implements PlayerInterface {
 
     this.fullScreen = new FullScreen(this)
     this.controller = new Controller(this)
+
+    if (this.options.danmaku) {
+      this.danmaku = new Danmaku({
+        container: this.dom.danmaku,
+        height: this.arrow ? 24 : 30,
+        data: [
+          { time: 0, type: 0, color: 16777215, author: 'f381ae18', text: '我的天怎么被顶上来了' },
+          { time: 0, type: 0, color: 16777215, author: '832afb47', text: '不错' },
+          {
+            time: 0.392,
+            type: 0,
+            color: 16777215,
+            author: 'bd364cdf',
+            text: '我这首歌至少听了100遍了！！！！'
+          },
+          {
+            time: 0.439,
+            type: 0,
+            color: 6830715,
+            author: '90f10f7f',
+            text: '此生无悔入四月，来生愿做友人A。'
+          },
+          { time: 0.835, type: 0, color: 16777215, author: 'c3f20575', text: '朱军，拔剑吧' },
+          { time: 1.146, type: 0, color: 16777215, author: '6739cb0f', text: '弹幕清了？' },
+          { time: 1.198, type: 0, color: 16777215, author: '63d9b55d', text: '果然最爱鹅屋了' }
+        ],
+        time: () => this.video.currentTime,
+        events: this.events
+      })
+    }
 
     document.addEventListener(
       'click',
@@ -229,6 +260,9 @@ export default class Player implements PlayerInterface {
     this.events.on(name, callback)
   }
   resize() {
+    if (this.danmaku) {
+      this.danmaku.resize()
+    }
     if (this.controller.thumbnails) {
       this.controller.thumbnails.resize(
         160,
