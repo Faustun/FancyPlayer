@@ -50,11 +50,13 @@ export default class Player implements PlayerInterface {
     this.tran = new I18n(this.options.lang!).tran
     this.events = new Events()
     this.user = new User(this)
-
     this.container = this.options.container
     Utils.classList.addClasses(this.container, 'dplayer dplayer-hide-controller')
     if (!this.options.danmaku) {
       Utils.classList.addClass(this.container, 'dplayer-no-danmaku')
+    }
+    if (!this.options.highlight || (this.options.highlight && !this.options.highlight.length)) {
+      Utils.classList.addClass(this.container, 'dplayer-no-highlight')
     }
     if (this.options.live) {
       Utils.classList.addClass(this.container, 'dplayer-live')
