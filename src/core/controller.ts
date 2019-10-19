@@ -172,20 +172,11 @@ export default class Controller {
             let labelNode = document.createElement('div') as HTMLElement
             Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
             labelNode.innerText = parentHighlights[i].label!
-            if (i + 1 < parentHighlights.length) {
-              labelNode!.style.left =
-                ((parentHighlights[i + 1].time / duration - parentHighlights[i].time / duration) /
-                  2 +
-                  parentHighlights[i].time / duration) *
-                  100 +
-                '%'
-            } else if (i + 1 === parentHighlights.length) {
-              labelNode!.style.left =
-                ((1 - parentHighlights[i].time / duration) / 2 +
-                  parentHighlights[i].time / duration) *
-                  100 +
-                '%'
+            if (i % 2) {
+              labelNode!.style.top = -20 + 'px'
             }
+            labelNode!.style.left =
+              (parentHighlights[i].time / duration + 20 / duration) * 100 + '%'
             this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
           }
         } else {

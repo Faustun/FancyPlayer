@@ -53,7 +53,7 @@ export default class Dom {
       this.video = this.createMediaDom({
         ele: this.videoWrap,
         label: 'video',
-        className: 'dplayer-video dplayer-video-current',
+        className: 'dplayer-video dplayer-video-current dplayer-no-highlight',
         url,
         poster: pic,
         preload,

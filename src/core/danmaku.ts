@@ -47,10 +47,9 @@ class Danmaku {
       const itemHeight = this.options.height
       const danWidth = this.container.offsetWidth
       const danHeight = this.container.offsetHeight
-      const itemY = parseInt(danHeight / itemHeight + '')
-
+      const itemY = parseInt(danHeight / itemHeight + '', 10)
       const danItemRight = (ele: HTMLElement) => {
-        const eleWidth = ele.offsetWidth || parseInt(ele.style.width!)
+        const eleWidth = ele.offsetWidth || parseInt(ele.style.width!, 10)
         const eleRight =
           ele.getBoundingClientRect().right ||
           this.container.getBoundingClientRect().right + eleWidth
@@ -71,7 +70,7 @@ class Danmaku {
             for (let j = 0; j < item.length; j++) {
               const danRight = danItemRight(item[j]) - 10
               if (
-                danRight <= danWidth - tmp * danSpeed(parseInt(item[j].style.width)) ||
+                danRight <= danWidth - tmp * danSpeed(parseInt(item[j].style.width, 10)) ||
                 danRight <= 0
               ) {
                 break
