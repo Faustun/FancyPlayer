@@ -11,12 +11,16 @@ export default class Controller {
   disableAutoHide: any
   status: boolean
   onOff: boolean
+  parentHighlights: InterfaceHighlights[]
+  labelNodes: HTMLElement[]
 
   constructor(player: PlayerInterface) {
     this.player = player
     this.autoHideTimer = 0
     this.status = false
     this.onOff = true
+    this.parentHighlights = []
+    this.labelNodes = []
 
     this.player.dom.mask.addEventListener('click', () => {
       this.maskhide()
@@ -151,16 +155,27 @@ export default class Controller {
           ;[].slice.call(highlightLabels, 0).forEach((item: HTMLElement) => {
             this.player.dom.playedBarWrap.removeChild(item)
           })
-          let parentHighlights: InterfaceHighlights[] = []
           for (let i = 0; i < highlightOptions.length; i++) {
             const highlightNode = document.createElement('div') as HTMLElement
             if (!highlightOptions[i].label) {
               Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-small')
               highlightNode.style.backgroundColor = this.player.options.theme!
             } else {
-              parentHighlights.push(highlightOptions[i])
+              this.parentHighlights.push(highlightOptions[i])
               Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
               highlightNode.style.borderColor = this.player.options.theme!
+
+              // 节点
+              let labelNode = document.createElement('div') as HTMLElement
+              this.labelNodes.push(labelNode)
+              Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
+              labelNode.innerText = highlightOptions[i].label!
+              if (i % 2) {
+                labelNode!.style.top = -22 + 'px'
+              }
+              labelNode!.style.backgroundColor = 'rgba(98, 102, 105, 0.9)'
+              labelNode!.style.padding = '5px 10px'
+              this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
             }
             highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
 
@@ -168,33 +183,31 @@ export default class Controller {
                 `
             this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
           }
-          for (let i = 0; i < parentHighlights.length; i++) {
-            let labelNode = document.createElement('div') as HTMLElement
-            Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
-            labelNode.innerText = parentHighlights[i].label!
-            if (i % 2) {
-              labelNode!.style.top = -22 + 'px'
-            }
-            labelNode!.style.backgroundColor = 'rgba(98, 102, 105, 0.9)'
-            labelNode!.style.padding = '5px 10px'
-            let left =
-              (parentHighlights[i].time / duration +
-                40 / this.player.dom.playedBarWrap.clientWidth) *
-              100
 
-            if (100 - left < (68 / this.player.dom.playedBarWrap.clientWidth) * 100) {
-              labelNode!.style.left =
-                (1 - 34 / this.player.dom.playedBarWrap.clientWidth) * 100 + '%'
-            } else {
-              labelNode!.style.left = left + '%'
-            }
-            this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
-          }
+          this._setNodeTextLeft()
         } else {
           Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
         }
       }
     })
+  }
+
+  private _setNodeTextLeft(): void {
+    const duration = (this.player.video as HTMLVideoElement).duration
+    console.log(this.player.dom.playedBarWrap.clientWidth)
+    for (let i = 0; i < this.parentHighlights.length; i++) {
+      let left =
+        (this.parentHighlights[i].time / duration +
+          40 / this.player.dom.playedBarWrap.clientWidth) *
+        100
+
+      if (100 - left < (68 / this.player.dom.playedBarWrap.clientWidth) * 100) {
+        this.labelNodes[i]!.style.left =
+          (1 - 34 / this.player.dom.playedBarWrap.clientWidth) * 100 + '%'
+      } else {
+        this.labelNodes[i]!.style.left = left + '%'
+      }
+    }
   }
 
   // 视频缩略图
@@ -335,10 +348,16 @@ export default class Controller {
   initFullButton(): void {
     this.player.dom.browserFullButton.addEventListener('click', () => {
       this.player.fullScreen.toggle('browser')
+      setTimeout(() => {
+        this._setNodeTextLeft()
+      }, 50)
     })
 
     this.player.dom.webFullButton.addEventListener('click', () => {
       this.player.fullScreen.toggle('web')
+      setTimeout(() => {
+        this._setNodeTextLeft()
+      }, 50)
     })
   }
 
