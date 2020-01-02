@@ -62,7 +62,7 @@ new Player({
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
         },
         {
-            time: 660,
+            time: 640,
             label: '总结分享',
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/601/w/120/h/90'
         }

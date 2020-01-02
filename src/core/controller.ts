@@ -194,14 +194,13 @@ export default class Controller {
 
   private _setNodeTextLeft(): void {
     const duration = (this.player.video as HTMLVideoElement).duration
-    console.log(this.player.dom.playedBarWrap.clientWidth)
     for (let i = 0; i < this.parentHighlights.length; i++) {
       let left =
         (this.parentHighlights[i].time / duration +
           40 / this.player.dom.playedBarWrap.clientWidth) *
         100
 
-      if (100 - left < (68 / this.player.dom.playedBarWrap.clientWidth) * 100) {
+      if (100 - left < (34 / this.player.dom.playedBarWrap.clientWidth) * 100) {
         this.labelNodes[i]!.style.left =
           (1 - 34 / this.player.dom.playedBarWrap.clientWidth) * 100 + '%'
       } else {
