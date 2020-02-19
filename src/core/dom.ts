@@ -71,7 +71,7 @@ export default class Dom {
       })
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
     }
-    if (programs.length > 1) {
+    if (programs && programs.length > 1) {
       const program = this.createDom({
         ele: element,
         label: 'div',
