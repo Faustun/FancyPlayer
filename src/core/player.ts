@@ -405,7 +405,7 @@ export default class Player implements PlayerInterface {
     this.dom.ptime.innerHTML = Utils.secondToTime(time)
   }
 
-  switchVideo(video: PlayerConfigVideo, highlight: [] = []) {
+  switchVideo(video: PlayerConfigVideo, highlight: any = []) {
     this.pause()
     this.video.poster = video.pic ? video.pic : ''
     this.video.src = video.url

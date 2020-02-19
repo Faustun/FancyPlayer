@@ -201,7 +201,7 @@ export default class Controller {
           40 / this.player.dom.playedBarWrap.clientWidth) *
         100
 
-      if (100 - left < (68 / this.player.dom.playedBarWrap.clientWidth) * 100) {
+      if (100 - left < (34 / this.player.dom.playedBarWrap.clientWidth) * 100) {
         this.labelNodes[i]!.style.left =
           (1 - 34 / this.player.dom.playedBarWrap.clientWidth) * 100 + '%'
       } else {
@@ -350,7 +350,7 @@ export default class Controller {
       this.player.fullScreen.toggle('browser')
       setTimeout(() => {
         this._setNodeTextLeft()
-      }, 50)
+      }, 80)
     })
 
     this.player.dom.webFullButton.addEventListener('click', () => {
