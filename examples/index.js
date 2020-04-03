@@ -5,6 +5,7 @@ document.body.appendChild(div)
 
 new Player({
     container: div,
+    programs: ['https://qiniu.fancyrobot.com/online/images/siwei.png', 'https://qiniu.fancyrobot.com/online/images/jinjie.png'],
     video: {
         url: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4',
         pic: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/0'

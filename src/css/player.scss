@@ -109,12 +109,18 @@
       .dplayer-controller {
         opacity: 0;
       }
+      .dplayer-program {
+        opacity: 0;
+      }
 
       &:hover {
         .dplayer-controller-mask {
           opacity: 1;
         }
         .dplayer-controller {
+          opacity: 1;
+        }
+        .dplayer-program {
           opacity: 1;
         }
       }
@@ -140,11 +146,15 @@
 
     .dplayer-controller-mask {
       opacity: 0;
-      transform: translateY(120%);
+      transform: translateY(160%);
     }
     .dplayer-controller {
       opacity: 0;
-      transform: translateY(120%);
+      transform: translateY(160%);
+    }
+    .dplayer-program {
+      opacity: 0;
+      transform: translateX(120%);
     }
   }
   &.dplayer-show-controller {
@@ -152,6 +162,9 @@
       opacity: 1;
     }
     .dplayer-controller {
+      opacity: 1;
+    }
+    .dplayer-program {
       opacity: 1;
     }
   }

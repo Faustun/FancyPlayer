@@ -37,6 +37,7 @@ export default class Dom {
   mask?: HTMLElement
   controllerLeft?: HTMLElement
   danmaku?: HTMLElement
+  programs?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -44,7 +45,7 @@ export default class Dom {
   }
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void {
-    const { video, preload, screenshot, logo, theme, danmaku } = options
+    const { video, preload, screenshot, logo, theme, danmaku, programs } = options
     this.mask = this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
     this.videoWrap = this.createDom({ ele: element, label: 'div', className: 'dplayer-video-wrap' })
     // 视频
@@ -69,6 +70,30 @@ export default class Dom {
         className: 'dplayer-logo'
       })
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
+    }
+    if (programs && programs.length > 1) {
+      const program = this.createDom({
+        ele: element,
+        label: 'div',
+        className: 'dplayer-program'
+      })
+      const programInner = this.createDom({
+        ele: program,
+        label: 'div',
+        className: 'dplayer-program-inner'
+      })
+      this.createDom({
+        ele: programInner,
+        label: 'div',
+        className: 'dplayer-program-item',
+        styles: `background-image: url(${programs[0]})`
+      })
+      this.createDom({
+        ele: programInner,
+        label: 'div',
+        className: 'dplayer-program-item',
+        styles: `background-image: url(${programs[1]})`
+      })
     }
     if (danmaku) {
       this.danmaku = this.createDom({
