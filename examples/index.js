@@ -35,29 +35,6 @@ new Player({
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/31/w/120/h/90'
         },
         {
-            time: 120,
-            label: '科普讲解',
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/121/w/120/h/90'
-        },
-        {
-            time: 660,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/61/w/120/h/90'
-        },
-        {
-            time: 680,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/91/w/480/h/90'
-        },
-        {
-            time: 320,
-            label: '创意搭建',
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/321/w/120/h/90'
-        },
-        {
-            time: 400,
-            label: '思维编程',
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/401/w/120/h/90'
-        },
-        {
             time: 500,
             label: '扩展进阶',
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'

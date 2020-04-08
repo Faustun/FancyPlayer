@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-08 16:58:52
+ * @LastEditTime: 2020-04-08 18:10:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -36,10 +36,12 @@ export default class Section implements SectionInterface {
     this.sectionInner = this.player.dom.sectionInner
     this.initSections()
     this.sectionInner.addEventListener(Utils.nameMap.dragStart, this.onMouseDown.bind(this))
-    if (this.getMinDistance() > 0) {
-      Utils.classList.addClass(this.player.dom.section, 'align-center')
+    if (Utils.isMobile) {
+      setTimeout(() => {
+        this.controlAlignCenter()
+      }, 1000)
     } else {
-      Utils.classList.removeClass(this.player.dom.section, 'align-center')
+      this.controlAlignCenter()
     }
   }
 
@@ -55,6 +57,14 @@ export default class Section implements SectionInterface {
     const sectionInnerHeight = this.sectionInner.clientHeight
     let minDistance = -(sectionInnerHeight - sectionHeight)
     return minDistance
+  }
+
+  controlAlignCenter(): void {
+    if (this.getMinDistance() > 0) {
+      Utils.classList.addClass(this.player.dom.section, 'align-center')
+    } else {
+      Utils.classList.removeClass(this.player.dom.section, 'align-center')
+    }
   }
 
   sectionsClick(time: number): void {
