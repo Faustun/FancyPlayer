@@ -129,13 +129,13 @@ export default class FullScreen {
   }
 
   toggle(type = 'browser') {
-    setTimeout(() => {
-      if (this.player.section.getMinDistance() > 0) {
-        Utils.classList.addClass(this.player.dom.section, 'align-center')
-      } else {
-        Utils.classList.removeClass(this.player.dom.section, 'align-center')
-      }
-    }, 100)
+    // setTimeout(() => {
+    //   if (this.player.section.getMinDistance() > 0) {
+    //     Utils.classList.addClass(this.player.dom.section, 'align-center')
+    //   } else {
+    //     Utils.classList.removeClass(this.player.dom.section, 'align-center')
+    //   }
+    // }, 100)
 
     if (this.isFullScreen(type)) {
       this.cancel(type)

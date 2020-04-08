@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-08 18:10:43
+ * @LastEditTime: 2020-04-08 18:53:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -36,17 +36,21 @@ export default class Section implements SectionInterface {
     this.sectionInner = this.player.dom.sectionInner
     this.initSections()
     this.sectionInner.addEventListener(Utils.nameMap.dragStart, this.onMouseDown.bind(this))
-    if (Utils.isMobile) {
-      setTimeout(() => {
-        this.controlAlignCenter()
-      }, 1000)
-    } else {
-      this.controlAlignCenter()
-    }
+    // if (Utils.isMobile) {
+    //   setTimeout(() => {
+    //     this.controlAlignCenter()
+    //   }, 1000)
+    // } else {
+    //   this.controlAlignCenter()
+    // }
   }
 
   static get SLIDE_MIN(): number {
     return 3
+  }
+
+  getViewPortHeight(): number {
+    return document.documentElement.clientHeight || document.body.clientHeight
   }
 
   getMaxDistance(): number {
@@ -167,6 +171,9 @@ export default class Section implements SectionInterface {
               const highlightNodeBor = document.createElement('span') as HTMLElement
               highlightNodeBor.className = 'dplayer-section-line'
               highlightNode.className = 'dplayer-section-item'
+              if (this.getViewPortHeight() <= 768) {
+                Utils.classList.addClass(highlightNode, 'small-space')
+              }
               highlightNodeIco.className = 'iconfont iconsection'
               const time = highlightOptions[i].time
               highlightNode.appendChild(highlightNodeIco)

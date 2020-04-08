@@ -1031,6 +1031,13 @@
   color: #fff;
   cursor: pointer;
 }
+.dplayer-sidebar .dplayer-section .dplayer-section-item.small-space {
+  height: 50px;
+}
+.dplayer-sidebar .dplayer-section .dplayer-section-item.small-space .dplayer-section-line {
+  top: 34px;
+  height: 32px;
+}
 .dplayer-sidebar .dplayer-section .dplayer-section-item:last-child .dplayer-section-line {
   display: none;
 }

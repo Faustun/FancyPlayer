@@ -47,6 +47,13 @@
       font-size: 16px;
       color: #fff;
       cursor: pointer;
+      &.small-space {
+        height: 50px;
+        .dplayer-section-line {
+          top: 34px;
+          height: 32px;
+        }
+      }
       &:last-child {
         .dplayer-section-line {
           display: none;
