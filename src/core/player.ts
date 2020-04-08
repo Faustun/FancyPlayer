@@ -256,9 +256,9 @@ export default class Player implements PlayerInterface {
       const activeNode = formerlyNodes[formerlyNodes.length - 1]
       if (this.activeIndex !== formerlyNodes.length) {
         this.activeIndex = formerlyNodes.length
-        this.section.followPlaySlide(activeNode)
+        activeNode && this.section.followPlaySlide(activeNode)
       }
-      if (activeNode.style.color !== this.options.theme) {
+      if (activeNode && activeNode.style.color !== this.options.theme) {
         activeNode.style.color = this.options.theme
       }
     })

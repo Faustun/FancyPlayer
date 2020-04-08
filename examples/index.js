@@ -22,7 +22,7 @@ new Player({
     },
     highlight: [
         {
-            time: 0,
+            time: 10,
             label: '情景引入',
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
         },
