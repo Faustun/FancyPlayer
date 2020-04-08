@@ -38,6 +38,9 @@ export default class Dom {
   controllerLeft?: HTMLElement
   danmaku?: HTMLElement
   programs?: HTMLElement
+  section?: HTMLElement
+  sidebar?: HTMLElement
+  sectionInner?: HTMLElement
 
   constructor(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface) {
     this.container = element
@@ -45,7 +48,7 @@ export default class Dom {
   }
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void {
-    const { video, preload, screenshot, logo, theme, danmaku, programs } = options
+    const { video, preload, screenshot, logo, theme, danmaku, programs, highlight } = options
     this.mask = this.createDom({ ele: element, label: 'div', className: 'dplayer-mask' })
     this.videoWrap = this.createDom({ ele: element, label: 'div', className: 'dplayer-video-wrap' })
     // 视频
@@ -54,7 +57,7 @@ export default class Dom {
       this.video = this.createMediaDom({
         ele: this.videoWrap,
         label: 'video',
-        className: 'dplayer-video dplayer-video-current dplayer-no-highlight',
+        className: 'dplayer-video dplayer-video-current',
         url,
         poster: pic,
         preload,
@@ -71,30 +74,46 @@ export default class Dom {
       })
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
     }
+
+    this.sidebar = this.createDom({
+      ele: element,
+      label: 'div',
+      className: 'dplayer-sidebar'
+    })
+
     if (programs && programs.length > 1) {
       const program = this.createDom({
-        ele: element,
+        ele: this.sidebar,
         label: 'div',
         className: 'dplayer-program'
       })
-      const programInner = this.createDom({
-        ele: program,
-        label: 'div',
-        className: 'dplayer-program-inner'
-      })
       this.createDom({
-        ele: programInner,
+        ele: program,
         label: 'div',
         className: 'dplayer-program-item',
         styles: `background-image: url(${programs[0]})`
       })
       this.createDom({
-        ele: programInner,
+        ele: program,
         label: 'div',
         className: 'dplayer-program-item',
         styles: `background-image: url(${programs[1]})`
       })
     }
+
+    if (highlight && highlight) {
+      this.section = this.createDom({
+        ele: this.sidebar,
+        label: 'div',
+        className: 'dplayer-section'
+      })
+      this.sectionInner = this.createDom({
+        ele: this.section,
+        label: 'div',
+        className: 'dplayer-section-inner'
+      })
+    }
+
     if (danmaku) {
       this.danmaku = this.createDom({
         ele: this.videoWrap,

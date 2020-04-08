@@ -3,6 +3,7 @@ import { TranInterface } from './i18n'
 import { UserInterface } from './user'
 import { EventsInterface, PlayerOnCallBack } from './events'
 import { DomInterface } from './dom'
+import { SectionInterface } from './section'
 
 export interface PlayerInterface {
   bar: any
@@ -25,6 +26,7 @@ export interface PlayerInterface {
   dom: DomInterface
   noticeTime: any
   focus?: boolean
+  section: SectionInterface
 
   resize(): void
   play(): void

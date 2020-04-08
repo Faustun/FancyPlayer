@@ -109,7 +109,7 @@
       .dplayer-controller {
         opacity: 0;
       }
-      .dplayer-program {
+      .dplayer-sidebar {
         opacity: 0;
       }
 
@@ -120,7 +120,7 @@
         .dplayer-controller {
           opacity: 1;
         }
-        .dplayer-program {
+        .dplayer-sidebar {
           opacity: 1;
         }
       }
@@ -146,15 +146,15 @@
 
     .dplayer-controller-mask {
       opacity: 0;
-      transform: translateY(160%);
+      transform: translateY(100%);
     }
     .dplayer-controller {
       opacity: 0;
-      transform: translateY(160%);
+      transform: translateY(100%);
     }
-    .dplayer-program {
+    .dplayer-sidebar {
       opacity: 0;
-      transform: translateX(120%);
+      transform: translateX(100%);
     }
   }
   &.dplayer-show-controller {
@@ -164,7 +164,7 @@
     .dplayer-controller {
       opacity: 1;
     }
-    .dplayer-program {
+    .dplayer-sidebar {
       opacity: 1;
     }
   }

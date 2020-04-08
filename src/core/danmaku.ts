@@ -124,7 +124,6 @@ class Danmaku {
         switch (dan[i].type) {
           case 'right':
             tunnel = getTunnel(item, dan[i].type, itemWidth)
-            console.log(tunnel)
             if (tunnel >= 0) {
               item.style.width = itemWidth + 1 + 'px'
               item.style.top = itemHeight * tunnel + 'px'

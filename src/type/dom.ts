@@ -50,6 +50,9 @@ export interface DomInterface {
   doubleSpeedPopup: HTMLElement
   mask: HTMLElement
   controllerLeft: HTMLElement
+  section: HTMLElement
+  sectionInner: HTMLElement
+  sidebar: HTMLElement
 
   init(element: HTMLElement, options: PlayerInterfaceConfig, tran: TranInterface): void
   createDom(params: createDomParams): any

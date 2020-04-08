@@ -47,7 +47,7 @@ export default class Controller {
     this.initPlayedBar()
     this.initFullButton()
     this.initDoubleSpeed()
-    this.initHighlights()
+    // this.initHighlights()
     this.initVolumeButton()
   }
 
@@ -347,16 +347,16 @@ export default class Controller {
   initFullButton(): void {
     this.player.dom.browserFullButton.addEventListener('click', () => {
       this.player.fullScreen.toggle('browser')
-      setTimeout(() => {
-        this._setNodeTextLeft()
-      }, 80)
+      // setTimeout(() => {
+      //   this._setNodeTextLeft()
+      // }, 80)
     })
 
     this.player.dom.webFullButton.addEventListener('click', () => {
       this.player.fullScreen.toggle('web')
-      setTimeout(() => {
-        this._setNodeTextLeft()
-      }, 50)
+      // setTimeout(() => {
+      //   this._setNodeTextLeft()
+      // }, 50)
     })
   }
 
@@ -441,6 +441,9 @@ export default class Controller {
   }
 
   hide(): void {
+    if (this.player.paused) {
+      return
+    }
     if (!Utils.classList.hasClass(this.player.container, 'dplayer-hide-controller')) {
       Utils.classList.addClass(this.player.container, 'dplayer-hide-controller')
     }

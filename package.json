@@ -1,6 +1,6 @@
 {
   "name": "fancy-player",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "dist/fancy-player.umd.js",
