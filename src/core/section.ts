@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-08 15:02:49
+ * @LastEditTime: 2020-04-08 16:58:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -36,6 +36,11 @@ export default class Section implements SectionInterface {
     this.sectionInner = this.player.dom.sectionInner
     this.initSections()
     this.sectionInner.addEventListener(Utils.nameMap.dragStart, this.onMouseDown.bind(this))
+    if (this.getMinDistance() > 0) {
+      Utils.classList.addClass(this.player.dom.section, 'align-center')
+    } else {
+      Utils.classList.removeClass(this.player.dom.section, 'align-center')
+    }
   }
 
   static get SLIDE_MIN(): number {
