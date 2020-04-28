@@ -7,7 +7,7 @@
   padding: 10px 0;
   user-select: none;
   transition: all 0.3s ease;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(98, 102, 105, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,16 +47,16 @@
       font-size: 16px;
       color: #fff;
       cursor: pointer;
+      &:first-child {
+        .dplayer-section-line {
+          display: none;
+        }
+      }
       &.small-space {
         height: 50px;
         .dplayer-section-line {
-          top: 34px;
+          top: -15px;
           height: 32px;
-        }
-      }
-      &:last-child {
-        .dplayer-section-line {
-          display: none;
         }
       }
       .dplayer-section-line {
@@ -64,12 +64,13 @@
         content: "";
         position: absolute;
         left: 55px;
-        top: 50px;
+        top: -30px;
         height: 60px;
-        border-left: 2px dashed #fff;
+        border-left: 2px dashed;
+        border-color: inherit;
       }
       .iconfont {
-        font-size: 18px;
+        font-size: 19px;
         display: inline-block;
         margin-right: 5px;
         color: inherit;

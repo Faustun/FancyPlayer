@@ -4,7 +4,6 @@ import { TranInterface } from '../type/i18n'
 import { EventsInterface, PlayerOnCallBack } from '../type/events'
 import { UserInterface } from '../type/user'
 import { BarInterface } from '../type/bar'
-import { SectionInterface } from '../type/section'
 import handleOption from './options'
 import I18n from './i18n'
 import Events from './events'
@@ -28,7 +27,6 @@ export default class Player implements PlayerInterface {
   tran: TranInterface
   events: EventsInterface
   user: UserInterface
-  section: SectionInterface
   container: HTMLElement
   arrow: boolean
   dom: any
@@ -38,6 +36,7 @@ export default class Player implements PlayerInterface {
   controller: any
   paused?: boolean
   timer: any
+  section: any
   danmaku: any
   noticeTime: any
   focus?: boolean
@@ -82,7 +81,10 @@ export default class Player implements PlayerInterface {
 
     this.fullScreen = new FullScreen(this)
     this.controller = new Controller(this)
-    this.section = new Section(this)
+
+    if (this.options.highlight) {
+      this.section = new Section(this)
+    }
 
     if (this.options.danmaku) {
       this.danmaku = new Danmaku({
@@ -230,36 +232,8 @@ export default class Player implements PlayerInterface {
     this.on('timeupdate', () => {
       this.bar.set('played', this.video.currentTime / this.video.duration, 'width')
       const currentTime = Utils.secondToTime(this.video.currentTime)
-      const nodeSection = document.querySelectorAll('.dplayer-section-item')
-      const formerlyNodes = [] as any
       if (this.dom.ptime.innerHTML !== currentTime) {
         this.dom.ptime.innerHTML = currentTime
-      }
-      ;[].slice.call(nodeSection, 0).forEach((item: HTMLElement) => {
-        const targetTime = Number(item.getAttribute('data-time'))!
-        if (item.style.color !== '#fff') {
-          item.style.color = '#fff'
-        }
-        if (this.video.currentTime >= targetTime) {
-          formerlyNodes.push(item)
-        }
-      })
-      for (let i = 0; i < formerlyNodes.length; i++) {
-        const sectionLine = formerlyNodes[i].getElementsByClassName('dplayer-section-line')[0]
-        if (sectionLine.style.borderColor !== '#ddd') {
-          sectionLine.style.borderColor = '#ddd'
-        }
-        if (formerlyNodes[i].style.color !== '#ddd') {
-          formerlyNodes[i].style.color = '#ddd'
-        }
-      }
-      const activeNode = formerlyNodes[formerlyNodes.length - 1]
-      if (this.activeIndex !== formerlyNodes.length) {
-        this.activeIndex = formerlyNodes.length
-        activeNode && this.section.followPlaySlide(activeNode)
-      }
-      if (activeNode && activeNode.style.color !== this.options.theme) {
-        activeNode.style.color = this.options.theme
       }
     })
 

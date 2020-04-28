@@ -75,43 +75,43 @@ export default class Dom {
       this.createDom({ ele: playerLogo, label: 'img', url: logo })
     }
 
-    this.sidebar = this.createDom({
-      ele: element,
-      label: 'div',
-      className: 'dplayer-sidebar'
-    })
-
-    if (programs && programs.length > 1) {
-      const program = this.createDom({
-        ele: this.sidebar,
+    if ((programs && programs.length > 1) || (highlight && highlight.length)) {
+      this.sidebar = this.createDom({
+        ele: element,
         label: 'div',
-        className: 'dplayer-program'
+        className: 'dplayer-sidebar'
       })
-      this.createDom({
-        ele: program,
-        label: 'div',
-        className: 'dplayer-program-item',
-        styles: `background-image: url(${programs[0]})`
-      })
-      this.createDom({
-        ele: program,
-        label: 'div',
-        className: 'dplayer-program-item',
-        styles: `background-image: url(${programs[1]})`
-      })
-    }
-
-    if (highlight && highlight) {
-      this.section = this.createDom({
-        ele: this.sidebar,
-        label: 'div',
-        className: 'dplayer-section'
-      })
-      this.sectionInner = this.createDom({
-        ele: this.section,
-        label: 'div',
-        className: 'dplayer-section-inner'
-      })
+      if (programs && programs.length > 1) {
+        const program = this.createDom({
+          ele: this.sidebar,
+          label: 'div',
+          className: 'dplayer-program'
+        })
+        this.createDom({
+          ele: program,
+          label: 'div',
+          className: 'dplayer-program-item',
+          styles: `background-image: url(${programs[0]})`
+        })
+        this.createDom({
+          ele: program,
+          label: 'div',
+          className: 'dplayer-program-item',
+          styles: `background-image: url(${programs[1]})`
+        })
+      }
+      if (highlight && highlight.length) {
+        this.section = this.createDom({
+          ele: this.sidebar,
+          label: 'div',
+          className: 'dplayer-section'
+        })
+        this.sectionInner = this.createDom({
+          ele: this.section,
+          label: 'div',
+          className: 'dplayer-section-inner'
+        })
+      }
     }
 
     if (danmaku) {

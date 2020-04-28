@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-08 18:53:40
+ * @LastEditTime: 2020-04-28 15:47:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -36,13 +36,6 @@ export default class Section implements SectionInterface {
     this.sectionInner = this.player.dom.sectionInner
     this.initSections()
     this.sectionInner.addEventListener(Utils.nameMap.dragStart, this.onMouseDown.bind(this))
-    // if (Utils.isMobile) {
-    //   setTimeout(() => {
-    //     this.controlAlignCenter()
-    //   }, 1000)
-    // } else {
-    //   this.controlAlignCenter()
-    // }
   }
 
   static get SLIDE_MIN(): number {
@@ -56,6 +49,7 @@ export default class Section implements SectionInterface {
   getMaxDistance(): number {
     return 0
   }
+
   getMinDistance(): number {
     const sectionHeight = this.section.clientHeight
     const sectionInnerHeight = this.sectionInner.clientHeight
@@ -71,11 +65,11 @@ export default class Section implements SectionInterface {
     }
   }
 
-  sectionsClick(time: number): void {
+  sectionsClick(value: any): void {
     if (this.isDrag) {
       return
     }
-    this.player.seek(time)
+    this.player.events.trigger('node', value)
   }
 
   onMouseDown(e: any): void {
@@ -161,6 +155,7 @@ export default class Section implements SectionInterface {
     this.player.on('durationchange', () => {
       const duration = (this.player.video as HTMLVideoElement).duration
       const highlightOptions = this.player.options.highlight
+      const sectionDoms = []
       if (duration !== 1 && duration !== 0 && duration !== Infinity) {
         if (highlightOptions) {
           for (let i = 0; i < highlightOptions.length; i++) {
@@ -169,20 +164,34 @@ export default class Section implements SectionInterface {
               const highlightNodeText = document.createElement('span') as HTMLElement
               const highlightNodeIco = document.createElement('span') as HTMLElement
               const highlightNodeBor = document.createElement('span') as HTMLElement
+              const time = highlightOptions[i].time
               highlightNodeBor.className = 'dplayer-section-line'
               highlightNode.className = 'dplayer-section-item'
+              highlightNodeText.innerHTML = highlightOptions[i].label
+              if (time) {
+                highlightNode.setAttribute('data-time', time)
+              }
               if (this.getViewPortHeight() <= 768) {
                 Utils.classList.addClass(highlightNode, 'small-space')
               }
-              highlightNodeIco.className = 'iconfont iconsection'
-              const time = highlightOptions[i].time
+
+              if (highlightOptions[i].fileType === 1) {
+                highlightNodeIco.className = 'iconfont iconvideo'
+              } else if (highlightOptions[i].fileType === 2) {
+                highlightNodeIco.className = 'iconfont iconphoto'
+              }
+
               highlightNode.appendChild(highlightNodeIco)
               highlightNode.appendChild(highlightNodeText)
               highlightNode.appendChild(highlightNodeBor)
-              highlightNodeText.innerHTML = highlightOptions[i].label
-              highlightNode.setAttribute('data-time', time)
-              this.sectionInner!.appendChild(highlightNode)
-              highlightNode.addEventListener('click', this.sectionsClick.bind(this, time))
+              this.sectionInner.appendChild(highlightNode)
+
+              sectionDoms.push(highlightNode)
+
+              highlightNode.addEventListener(
+                'click',
+                this.sectionsClick.bind(this, { index: i, ele: highlightNode, nodes: sectionDoms })
+              )
             }
           }
         }

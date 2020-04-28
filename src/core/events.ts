@@ -56,7 +56,8 @@ class Events implements EventsInterface {
       'webfullscreen_cancel',
       'subtitle_show',
       'subtitle_hide',
-      'subtitle_change'
+      'subtitle_change',
+      'node'
     ]
   }
 
