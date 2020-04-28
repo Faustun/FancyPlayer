@@ -82,7 +82,7 @@ export default class Player implements PlayerInterface {
     this.fullScreen = new FullScreen(this)
     this.controller = new Controller(this)
 
-    if (this.options.highlight) {
+    if (this.options.highlight && this.options.highlight.length) {
       this.section = new Section(this)
     }
 
@@ -409,7 +409,6 @@ export default class Player implements PlayerInterface {
     this.video.src = video.url
     this.initMSE(this.video, video.type || 'auto')
     this.options.highlight = highlight
-    this.controller.initHighlights()
   }
 
   destroy() {
