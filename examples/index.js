@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-08-17 11:57:30
- * @LastEditTime: 2020-04-28 15:44:39
+ * @LastEditTime: 2020-04-29 14:04:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\examples\index.js
@@ -34,6 +34,30 @@ let fp = new Player({
             label: '情景引入',
             fileType: 1,
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
+        },
+        {
+            time: 500,
+            label: '扩展进阶',
+            fileType: 1,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
+        },
+        {
+            time: 10,
+            label: '情景引入',
+            fileType: 1,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
+        },
+        {
+            time: 10,
+            label: '情景引入',
+            fileType: 1,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
+        },
+        {
+            time: 500,
+            label: '扩展进阶',
+            fileType: 1,
+            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
         },
         {
             time: 500,

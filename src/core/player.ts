@@ -403,12 +403,19 @@ export default class Player implements PlayerInterface {
     this.dom.ptime.innerHTML = Utils.secondToTime(time)
   }
 
-  switchVideo(video: PlayerConfigVideo, highlight: any = []) {
+  switchVideo(video: PlayerConfigVideo, highlight?: any) {
     this.pause()
     this.video.poster = video.pic ? video.pic : ''
     this.video.src = video.url
     this.initMSE(this.video, video.type || 'auto')
-    this.options.highlight = highlight
+    if (highlight) {
+      this.options.highlight = highlight
+      if (!this.section) {
+        this.section = new Section(this)
+      }
+      this.section.resetValue()
+      this.section.initSections()
+    }
   }
 
   destroy() {

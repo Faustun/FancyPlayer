@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-28 15:47:28
+ * @LastEditTime: 2020-04-29 14:06:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -21,6 +21,7 @@ export default class Section implements SectionInterface {
   currentY: number
   isPress: boolean
   isDrag: boolean
+  sectionDoms: any
 
   constructor(player: PlayerInterface) {
     this.player = player
@@ -28,6 +29,7 @@ export default class Section implements SectionInterface {
       x: 0,
       y: 0
     }
+    this.sectionDoms = []
     this.cacheY = 0
     this.currentY = 0
     this.isPress = false
@@ -40,6 +42,14 @@ export default class Section implements SectionInterface {
 
   static get SLIDE_MIN(): number {
     return 3
+  }
+
+  resetValue() {
+    this.sectionDoms = []
+    this.cacheY = 0
+    this.currentY = 0
+    this.isPress = false
+    this.isDrag = false
   }
 
   getViewPortHeight(): number {
@@ -65,11 +75,12 @@ export default class Section implements SectionInterface {
     }
   }
 
-  sectionsClick(value: any): void {
+  sectionsClick(data: any): void {
     if (this.isDrag) {
       return
     }
-    this.player.events.trigger('node', value)
+    this.nodesActive_(data.index)
+    this.player.events.trigger('node', data)
   }
 
   onMouseDown(e: any): void {
@@ -123,6 +134,17 @@ export default class Section implements SectionInterface {
     document.removeEventListener(Utils.nameMap.dragMove, this.onDragging.bind(this))
     document.removeEventListener(Utils.nameMap.dragEnd, this.onDragEnd.bind(this))
   }
+  nodesActive_(index: number, colour?: string) {
+    colour = colour || '#ddd'
+    for (let i = 0; i < this.sectionDoms.length; i++) {
+      if (i <= index) {
+        this.sectionDoms[i].style.color = colour
+      } else {
+        this.sectionDoms[i].style.color = '#fff'
+      }
+    }
+    this.followPlaySlide(this.sectionDoms[index])
+  }
   followPlaySlide(element: HTMLElement): void {
     const boxOffsetTop = this.section.getBoundingClientRect().top
     const boxOffsetHeight = this.section.getBoundingClientRect().height
@@ -155,7 +177,7 @@ export default class Section implements SectionInterface {
     this.player.on('durationchange', () => {
       const duration = (this.player.video as HTMLVideoElement).duration
       const highlightOptions = this.player.options.highlight
-      const sectionDoms = []
+      this.sectionDoms = []
       if (duration !== 1 && duration !== 0 && duration !== Infinity) {
         if (highlightOptions) {
           for (let i = 0; i < highlightOptions.length; i++) {
@@ -186,11 +208,15 @@ export default class Section implements SectionInterface {
               highlightNode.appendChild(highlightNodeBor)
               this.sectionInner.appendChild(highlightNode)
 
-              sectionDoms.push(highlightNode)
+              this.sectionDoms.push(highlightNode)
 
               highlightNode.addEventListener(
                 'click',
-                this.sectionsClick.bind(this, { index: i, ele: highlightNode, nodes: sectionDoms })
+                this.sectionsClick.bind(this, {
+                  index: i,
+                  ele: highlightNode,
+                  nodes: this.sectionDoms
+                })
               )
             }
           }
