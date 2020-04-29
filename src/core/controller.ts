@@ -136,61 +136,61 @@ export default class Controller {
   }
 
   // 自定义进度条提示点
-  initHighlights(): void {
-    this.player.on('durationchange', () => {
-      const duration = (this.player.video as HTMLVideoElement).duration
-      const highlightOptions = this.player.options.highlight
-      if (duration !== 1 && duration !== 0 && duration !== Infinity) {
-        if (highlightOptions) {
-          if (highlightOptions.length) {
-            Utils.classList.removeClass(this.player.container, 'dplayer-no-highlight')
-          } else {
-            Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
-          }
-          const highlights = document.querySelectorAll('.dplayer-highlight')
-          const highlightLabels = document.querySelectorAll('.dplayer-highlight-label')
-          ;[].slice.call(highlights, 0).forEach((item: HTMLElement) => {
-            this.player.dom.playedBarWrap.removeChild(item)
-          })
-          ;[].slice.call(highlightLabels, 0).forEach((item: HTMLElement) => {
-            this.player.dom.playedBarWrap.removeChild(item)
-          })
-          for (let i = 0; i < highlightOptions.length; i++) {
-            const highlightNode = document.createElement('div') as HTMLElement
-            if (!highlightOptions[i].label) {
-              Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-small')
-              highlightNode.style.backgroundColor = this.player.options.theme!
-            } else {
-              this.parentHighlights.push(highlightOptions[i])
-              Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
-              highlightNode.style.borderColor = this.player.options.theme!
+  // initHighlights(): void {
+  //   this.player.on('durationchange', () => {
+  //     const duration = (this.player.video as HTMLVideoElement).duration
+  //     const highlightOptions = this.player.options.highlight
+  //     if (duration !== 1 && duration !== 0 && duration !== Infinity) {
+  //       if (highlightOptions) {
+  //         if (highlightOptions.length) {
+  //           Utils.classList.removeClass(this.player.container, 'dplayer-no-highlight')
+  //         } else {
+  //           Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
+  //         }
+  //         const highlights = document.querySelectorAll('.dplayer-highlight')
+  //         const highlightLabels = document.querySelectorAll('.dplayer-highlight-label')
+  //         ;[].slice.call(highlights, 0).forEach((item: HTMLElement) => {
+  //           this.player.dom.playedBarWrap.removeChild(item)
+  //         })
+  //         ;[].slice.call(highlightLabels, 0).forEach((item: HTMLElement) => {
+  //           this.player.dom.playedBarWrap.removeChild(item)
+  //         })
+  //         for (let i = 0; i < highlightOptions.length; i++) {
+  //           const highlightNode = document.createElement('div') as HTMLElement
+  //           if (!highlightOptions[i].label) {
+  //             Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-small')
+  //             highlightNode.style.backgroundColor = this.player.options.theme!
+  //           } else {
+  //             this.parentHighlights.push(highlightOptions[i])
+  //             Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
+  //             highlightNode.style.borderColor = this.player.options.theme!
 
-              // 节点
-              let labelNode = document.createElement('div') as HTMLElement
-              this.labelNodes.push(labelNode)
-              Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
-              labelNode.innerText = highlightOptions[i].label!
-              if (i % 2) {
-                labelNode!.style.top = -22 + 'px'
-              }
-              labelNode!.style.backgroundColor = 'rgba(98, 102, 105, 0.9)'
-              labelNode!.style.padding = '5px 10px'
-              this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
-            }
-            highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
+  //             // 节点
+  //             let labelNode = document.createElement('div') as HTMLElement
+  //             this.labelNodes.push(labelNode)
+  //             Utils.classList.addClass(labelNode, 'dplayer-highlight-label')
+  //             labelNode.innerText = highlightOptions[i].label!
+  //             if (i % 2) {
+  //               labelNode!.style.top = -22 + 'px'
+  //             }
+  //             labelNode!.style.backgroundColor = 'rgba(98, 102, 105, 0.9)'
+  //             labelNode!.style.padding = '5px 10px'
+  //             this.player.dom.playedBarWrap.insertBefore(labelNode!, this.player.dom.playedBarTime)
+  //           }
+  //           highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
 
-            highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>
-                `
-            this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
-          }
+  //           highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>
+  //               `
+  //           this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
+  //         }
 
-          this._setNodeTextLeft()
-        } else {
-          Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
-        }
-      }
-    })
-  }
+  //         this._setNodeTextLeft()
+  //       } else {
+  //         Utils.classList.addClass(this.player.container, 'dplayer-no-highlight')
+  //       }
+  //     }
+  //   })
+  // }
 
   private _setNodeTextLeft(): void {
     const duration = (this.player.video as HTMLVideoElement).duration
