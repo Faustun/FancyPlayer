@@ -39,5 +39,8 @@ export default (options: PlayerInterfaceConfig): PlayerInterfaceConfig => {
   if (options.video.quality) {
     options.video.url = options.video.quality[options.video.defaultQuality!].url
   }
+  if (options.highlight && options.highlight.length) {
+    options.isTimeNode = options.highlight.some(item => typeof item.time !== 'undefined')
+  }
   return options
 }

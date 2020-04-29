@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-08-17 11:57:30
- * @LastEditTime: 2020-04-29 14:04:47
+ * @LastEditTime: 2020-04-29 15:49:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\examples\index.js
@@ -40,40 +40,10 @@ let fp = new Player({
             label: '扩展进阶',
             fileType: 1,
             thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
-        },
-        {
-            time: 10,
-            label: '情景引入',
-            fileType: 1,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
-        },
-        {
-            time: 10,
-            label: '情景引入',
-            fileType: 1,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
-        },
-        {
-            time: 500,
-            label: '扩展进阶',
-            fileType: 1,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
-        },
-        {
-            time: 500,
-            label: '扩展进阶',
-            fileType: 1,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
-        },
-        {
-            time: 640,
-            label: '总结分享',
-            fileType: 1,
-            thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/601/w/120/h/90'
         }
+      
     ]
 })
 fp.on('node', (value) => {
-    console.log(value)
-    value.ele.style.color = '#f00'
+    fp.switchVideo({url: 'https://qiniu.fancyrobot.com/%E7%88%AC%E5%9D%A1%E6%B8%B8%E6%88%8F-%E6%89%8B%E6%9F%84%E7%89%884484523206.16'})
 })

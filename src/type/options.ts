@@ -17,6 +17,7 @@ export interface PlayerInterfaceConfig {
   logo?: string
   apiBackend?: string
   mutex?: boolean
+  highlight?: InterfaceHighlight[]
 
   [propName: string]: any
 }
@@ -29,6 +30,15 @@ export interface PlayerConfigVideo {
   thumbnails?: string
   type?: Type
   customType?: any
+}
+
+export interface InterfaceHighlight {
+  fileType: number
+  label?: string
+  thumbnail?: string
+  time?: number
+
+  [propName: string]: any
 }
 
 export interface InterfaceQuality {
