@@ -412,9 +412,10 @@ export default class Player implements PlayerInterface {
       this.options.highlight = highlight
       if (!this.section) {
         this.section = new Section(this)
+      } else {
+        this.section.resetValue()
+        this.section.initSections()
       }
-      this.section.resetValue()
-      this.section.initSections()
     }
   }
 

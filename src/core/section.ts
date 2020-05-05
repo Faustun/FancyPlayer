@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-04-29 15:50:16
+ * @LastEditTime: 2020-05-05 15:12:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -174,55 +174,63 @@ export default class Section implements SectionInterface {
 
   // 侧边节点
   initSections(): void {
-    this.player.on('durationchange', () => {
-      const duration = (this.player.video as HTMLVideoElement).duration
-      const highlightOptions = this.player.options.highlight
-      this.sectionDoms = []
-      this.sectionInner.innerHTML = ''
-      if (duration !== 1 && duration !== 0 && duration !== Infinity) {
-        if (highlightOptions) {
-          for (let i = 0; i < highlightOptions.length; i++) {
-            if (highlightOptions[i].label) {
-              const highlightNode = document.createElement('div') as HTMLElement
-              const highlightNodeText = document.createElement('span') as HTMLElement
-              const highlightNodeIco = document.createElement('span') as HTMLElement
-              const highlightNodeBor = document.createElement('span') as HTMLElement
-              const time = highlightOptions[i].time
-              highlightNodeBor.className = 'dplayer-section-line'
-              highlightNode.className = 'dplayer-section-item'
-              highlightNodeText.innerHTML = highlightOptions[i].label!
-              if (time) {
-                highlightNode.setAttribute('data-time', time + '')
-              }
-              if (this.getViewPortHeight() <= 768) {
-                Utils.classList.addClass(highlightNode, 'small-space')
-              }
-
-              if (highlightOptions[i].fileType === 1) {
-                highlightNodeIco.className = 'iconfont iconvideo'
-              } else if (highlightOptions[i].fileType === 2) {
-                highlightNodeIco.className = 'iconfont iconphoto'
-              }
-
-              highlightNode.appendChild(highlightNodeIco)
-              highlightNode.appendChild(highlightNodeText)
-              highlightNode.appendChild(highlightNodeBor)
-              this.sectionInner.appendChild(highlightNode)
-
-              this.sectionDoms.push(highlightNode)
-
-              highlightNode.addEventListener(
-                'click',
-                this.sectionsClick.bind(this, {
-                  index: i,
-                  ele: highlightNode,
-                  nodes: this.sectionDoms
-                })
-              )
-            }
+    if (this.player.options.isTimeNode) {
+      this.player.on('durationchange', () => {
+        const duration = (this.player.video as HTMLVideoElement).duration
+        if (duration !== 1 && duration !== 0 && duration !== Infinity) {
+          this._createSectionDom()
+        }
+      })
+    } else {
+      this._createSectionDom()
+    }
+  }
+  _createSectionDom() {
+    const highlightOptions = this.player.options.highlight
+    console.log(highlightOptions)
+    this.sectionDoms = []
+    this.sectionInner.innerHTML = ''
+    if (highlightOptions) {
+      for (let i = 0; i < highlightOptions.length; i++) {
+        if (highlightOptions[i].label) {
+          const highlightNode = document.createElement('div') as HTMLElement
+          const highlightNodeText = document.createElement('span') as HTMLElement
+          const highlightNodeIco = document.createElement('span') as HTMLElement
+          const highlightNodeBor = document.createElement('span') as HTMLElement
+          const time = highlightOptions[i].time
+          highlightNodeBor.className = 'dplayer-section-line'
+          highlightNode.className = 'dplayer-section-item'
+          highlightNodeText.innerHTML = highlightOptions[i].label!
+          if (time) {
+            highlightNode.setAttribute('data-time', time + '')
           }
+          if (this.getViewPortHeight() <= 768) {
+            Utils.classList.addClass(highlightNode, 'small-space')
+          }
+
+          if (highlightOptions[i].fileType === 1) {
+            highlightNodeIco.className = 'iconfont iconvideo'
+          } else if (highlightOptions[i].fileType === 2) {
+            highlightNodeIco.className = 'iconfont iconphoto'
+          }
+
+          highlightNode.appendChild(highlightNodeIco)
+          highlightNode.appendChild(highlightNodeText)
+          highlightNode.appendChild(highlightNodeBor)
+          this.sectionInner.appendChild(highlightNode)
+
+          this.sectionDoms.push(highlightNode)
+
+          highlightNode.addEventListener(
+            'click',
+            this.sectionsClick.bind(this, {
+              index: i,
+              ele: highlightNode,
+              nodes: this.sectionDoms
+            })
+          )
         }
       }
-    })
+    }
   }
 }

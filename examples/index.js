@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-08-17 11:57:30
- * @LastEditTime: 2020-04-29 15:49:32
+ * @LastEditTime: 2020-05-05 15:08:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\examples\index.js
@@ -45,5 +45,5 @@ let fp = new Player({
     ]
 })
 fp.on('node', (value) => {
-    fp.switchVideo({url: 'https://qiniu.fancyrobot.com/%E7%88%AC%E5%9D%A1%E6%B8%B8%E6%88%8F-%E6%89%8B%E6%9F%84%E7%89%884484523206.16'})
+    console.log(value)
 })
