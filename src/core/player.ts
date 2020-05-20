@@ -58,9 +58,6 @@ export default class Player implements PlayerInterface {
     if (!this.options.danmaku) {
       Utils.classList.addClass(this.container, 'dplayer-no-danmaku')
     }
-    // if (!this.options.highlight || (this.options.highlight && !this.options.highlight.length)) {
-    Utils.classList.addClass(this.container, 'dplayer-no-highlight')
-    // }
     if (this.options.live) {
       Utils.classList.addClass(this.container, 'dplayer-live')
     }

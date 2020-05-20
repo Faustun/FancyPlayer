@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-08-17 11:57:30
- * @LastEditTime: 2020-05-05 15:08:59
+ * @LastEditTime: 2020-05-20 14:45:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\examples\index.js
@@ -44,6 +44,19 @@ let fp = new Player({
       
     ]
 })
+console.log()
+
+// setHighlights
 fp.on('node', (value) => {
     console.log(value)
 })
+setTimeout(() => {
+    fp.section.setHighlights([{
+        time: 10,
+        thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/1/w/120/h/90'
+    },
+    {
+        time: 500,
+        thumbnail: 'http://qiniu.tongyishidai.com/%E7%94%B5%E9%92%BB21974261236.mp4?vframe/jpg/offset/501/w/120/h/90'
+    }])
+}, 1000)

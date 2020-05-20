@@ -296,13 +296,6 @@
 .dplayer.dplayer-mobile .dplayer-bar-time {
   display: none;
 }
-.dplayer.dplayer-no-highlight .dplayer-controller-mask,
-.dplayer.dplayer-no-highlight .dplayer-controller {
-  height: 38px;
-}
-.dplayer.dplayer-no-highlight .dplayer-controller .dplayer-bar-wrap {
-  bottom: 33px;
-}
 
 .dplayer-web-fullscreen-fix {
   position: fixed;
@@ -455,7 +448,7 @@
 
 .dplayer-controller-mask {
   background-color: rgba(98, 102, 105, 0.5);
-  height: 60px;
+  height: 38px;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -467,7 +460,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 38px;
   user-select: none;
   transition: all 0.3s ease;
 }
@@ -481,7 +474,7 @@
   padding: 5px 0;
   cursor: pointer;
   position: absolute;
-  bottom: 55px;
+  bottom: 33px;
   width: 100%;
   height: 6px;
   transition: all 0.3s ease;

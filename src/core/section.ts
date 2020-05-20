@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-05-05 15:12:27
+ * @LastEditTime: 2020-05-20 14:51:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -9,7 +9,7 @@
 
 import Utils from '../helpers/utils'
 
-import { SectionInterface, Coordinate } from '../type/section'
+import { SectionInterface, Coordinate, highlightInterface } from '../type/section'
 import { PlayerInterface } from '../type/player'
 
 export default class Section implements SectionInterface {
@@ -229,6 +229,27 @@ export default class Section implements SectionInterface {
               nodes: this.sectionDoms
             })
           )
+        }
+      }
+    }
+  }
+
+  // 自定义进度条提示点
+  setHighlights(highlightOptions: highlightInterface[]): void {
+    const duration = (this.player.video as HTMLVideoElement).duration
+    if (duration !== 1 && duration !== 0 && duration !== Infinity) {
+      if (highlightOptions) {
+        const highlights = document.querySelectorAll('.dplayer-highlight')
+        ;[].slice.call(highlights, 0).forEach((item: HTMLElement) => {
+          this.player.dom.playedBarWrap.removeChild(item)
+        })
+        for (let i = 0; i < highlightOptions.length; i++) {
+          const highlightNode = document.createElement('div') as HTMLElement
+          Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
+          highlightNode.style.borderColor = this.player.options.theme!
+          highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
+          highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>`
+          this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
         }
       }
     }

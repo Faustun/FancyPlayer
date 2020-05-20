@@ -192,17 +192,6 @@
       display: none;
     }
   }
-  &.dplayer-no-highlight {
-    .dplayer-controller-mask,
-    .dplayer-controller {
-      height: 38px;
-    }
-    .dplayer-controller {
-      .dplayer-bar-wrap {
-        bottom: 33px;
-      }
-    }
-  }
 }
 
 // To hide scroll bar, apply this class to <body>
