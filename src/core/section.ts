@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-05-21 16:43:51
+ * @LastEditTime: 2020-05-21 17:01:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -247,7 +247,9 @@ export default class Section implements SectionInterface {
           Utils.classList.addClasses(highlightNode, 'dplayer-highlight node-large')
           highlightNode.style.borderColor = this.player.options.theme!
           highlightNode.style.left = (highlightOptions[i].time / duration) * 100 + '%'
-          highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>`
+          if (highlightOptions[i].thumbnail) {
+            highlightNode.innerHTML = `<div class="dplayer-highlight-img" style="background-image: url('${highlightOptions[i].thumbnail}');"></div>`
+          }
           this.player.dom.playedBarWrap.insertBefore(highlightNode, this.player.dom.playedBarTime)
         }
       }
