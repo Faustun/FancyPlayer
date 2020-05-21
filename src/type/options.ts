@@ -34,7 +34,7 @@ export interface PlayerConfigVideo {
 
 export interface InterfaceHighlight {
   fileType: number
-  label?: string
+  nodeName?: string
   thumbnail?: string
   time?: number
 
@@ -45,9 +45,4 @@ export interface InterfaceQuality {
   name: string
   url: string
   type: string
-}
-
-export interface InterfaceHighlights {
-  time: number
-  label?: string
 }

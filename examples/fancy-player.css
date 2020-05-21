@@ -1020,10 +1020,11 @@
 }
 .dplayer-sidebar .dplayer-section .dplayer-section-item {
   display: flex;
-  justify-content: center;
   align-items: center;
   position: relative;
   height: 80px;
+  padding-left: 70px;
+  box-sizing: border-box;
   font-size: 16px;
   color: #fff;
   cursor: pointer;
@@ -1049,8 +1050,9 @@
   border-color: inherit;
 }
 .dplayer-sidebar .dplayer-section .dplayer-section-item .iconfont {
+  position: absolute;
+  left: 46px;
   font-size: 19px;
   display: inline-block;
-  margin-right: 5px;
   color: inherit;
 }

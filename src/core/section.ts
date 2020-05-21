@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-07 18:06:30
- * @LastEditTime: 2020-05-20 14:51:25
+ * @LastEditTime: 2020-05-21 16:43:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FancyPlayer\src\core\section.ts
@@ -187,12 +187,11 @@ export default class Section implements SectionInterface {
   }
   _createSectionDom() {
     const highlightOptions = this.player.options.highlight
-    console.log(highlightOptions)
     this.sectionDoms = []
     this.sectionInner.innerHTML = ''
     if (highlightOptions) {
       for (let i = 0; i < highlightOptions.length; i++) {
-        if (highlightOptions[i].label) {
+        if (highlightOptions[i].nodeName) {
           const highlightNode = document.createElement('div') as HTMLElement
           const highlightNodeText = document.createElement('span') as HTMLElement
           const highlightNodeIco = document.createElement('span') as HTMLElement
@@ -200,7 +199,7 @@ export default class Section implements SectionInterface {
           const time = highlightOptions[i].time
           highlightNodeBor.className = 'dplayer-section-line'
           highlightNode.className = 'dplayer-section-item'
-          highlightNodeText.innerHTML = highlightOptions[i].label!
+          highlightNodeText.innerHTML = highlightOptions[i].nodeName!
           if (time) {
             highlightNode.setAttribute('data-time', time + '')
           }
