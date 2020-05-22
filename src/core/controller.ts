@@ -253,6 +253,9 @@ export default class Controller {
       const highlightImg = highlight.querySelectorAll('.dplayer-highlight-img')[0] as HTMLElement
       const styleLeft = (parseFloat(highlight.style.left as string) / 100) * barWidth
       const isTrue = tx < halfWidth || tx + halfWidth > barWidth
+      if (!highlightImg) {
+        return
+      }
       highlightImg.innerText = Utils.secondToTime(time)
       if (isTrue && styleLeft < halfWidth) {
         highlightImg.style.marginLeft = '-' + styleLeft + 'px'
