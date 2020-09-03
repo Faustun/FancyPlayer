@@ -120,6 +120,10 @@ export default class Player implements PlayerInterface {
       },
       true
     )
+    this.container.addEventListener('contextmenu', e => {
+      const event = e || window.event
+      event.preventDefault()
+    })
     this.container.addEventListener(
       'click',
       () => {
