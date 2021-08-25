@@ -60,6 +60,10 @@ export default class Controller {
         this.player.toggle()
       })
     } else {
+      this.player.dom.bezelIconBox.addEventListener('click', e => {
+        this.player.toggle()
+        e.stopPropagation()
+      })
       this.player.dom.videoWrap.addEventListener('click', () => {
         this.setAutoHide()
         if (this.status) {

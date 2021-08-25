@@ -6,12 +6,12 @@
   bottom: 0;
   font-size: 22px;
   color: #fff;
-  pointer-events: none;
 
   .dplayer-bezel-icon {
     position: absolute;
     top: 50%;
     left: 50%;
+    display: none;
     margin: -30px 0 0 -50px;
     height: 60px;
     width: 100px;
@@ -21,13 +21,13 @@
     background: rgba(0, 0, 0, .5);
     border-radius: 10px;
     opacity: 0;
-    pointer-events: none;
     transition: all 0.3s ease;
     .iconfont {
       font-size: 50px;
     }
     
     &.dplayer-bezel-pause {
+      display: block;
       opacity: 1;
     }
 
