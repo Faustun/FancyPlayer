@@ -220,7 +220,7 @@ export default class Player implements PlayerInterface {
 
     this.on('play', () => {
       if (this.paused) {
-        this.play()
+        this.play(true)
       }
     })
 
@@ -281,16 +281,19 @@ export default class Player implements PlayerInterface {
     }
   }
 
-  play(): void {
+  play(fromNative?: boolean): void {
     this.paused = false
     Utils.classList.removeClass(this.dom.bezelIconBox, 'dplayer-bezel-pause')
 
     this.dom.playButtonIco.className = 'iconfont iconpause'
 
-    const playedPromise = Promise.resolve(this.video.play())
-    playedPromise.catch(() => {
-      this.pause()
-    })
+    if (!fromNative) {
+      const playedPromise = Promise.resolve(this.video.play())
+      playedPromise.catch(() => {
+        this.pause()
+      })
+    }
+
     this.timer.enable('loading')
     Utils.classList.removeClass(this.container, 'dplayer-paused')
     Utils.classList.addClass(this.container, 'dplayer-playing')
